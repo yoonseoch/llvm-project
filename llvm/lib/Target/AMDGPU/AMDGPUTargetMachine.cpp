@@ -857,6 +857,17 @@ void AMDGPUTargetMachine::registerPassBuilderCallbacks(PassBuilder &PB) {
 #define GET_PASS_REGISTRY "AMDGPUPassRegistry.def"
 #include "llvm/Passes/TargetPassRegistry.inc"
 
+  // Register CGSCC passes (not supported by TargetPassRegistry.inc)
+  PB.registerPipelineParsingCallback(
+      [this](StringRef Name, CGSCCPassManager &PM,
+             ArrayRef<PassBuilder::PipelineElement>) {
+        if (Name == "amdgpu-simple-attributor") {
+          PM.addPass(AMDGPUSimpleAttributorPass(*this));
+          return true;
+        }
+        return false;
+      });
+
   PB.registerScalarOptimizerLateEPCallback(
       [](FunctionPassManager &FPM, OptimizationLevel Level) {
         if (Level == OptimizationLevel::O0)
