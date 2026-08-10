@@ -1320,39 +1320,39 @@ main_body:
 define amdgpu_ps <4 x float> @load_2darraymsaa_tfe(<8 x i32> inreg %rsrc, ptr addrspace(1) inreg %out, i32 %s, i32 %t, i32 %slice, i32 %fragid) {
 ; VERDE-LABEL: load_2darraymsaa_tfe:
 ; VERDE:       ; %bb.0: ; %main_body
-; VERDE-NEXT:    v_mov_b32_e32 v5, v0
-; VERDE-NEXT:    v_mov_b32_e32 v0, 0
-; VERDE-NEXT:    v_mov_b32_e32 v8, v3
-; VERDE-NEXT:    v_mov_b32_e32 v7, v2
-; VERDE-NEXT:    v_mov_b32_e32 v6, v1
-; VERDE-NEXT:    v_mov_b32_e32 v1, v0
-; VERDE-NEXT:    v_mov_b32_e32 v2, v0
-; VERDE-NEXT:    v_mov_b32_e32 v3, v0
-; VERDE-NEXT:    v_mov_b32_e32 v4, v0
-; VERDE-NEXT:    image_load v[0:4], v[5:8], s[0:7] dmask:0xf unorm tfe da
+; VERDE-NEXT:    v_mov_b32_e32 v4, 0
+; VERDE-NEXT:    v_mov_b32_e32 v5, v4
+; VERDE-NEXT:    v_mov_b32_e32 v6, v4
+; VERDE-NEXT:    v_mov_b32_e32 v7, v4
+; VERDE-NEXT:    v_mov_b32_e32 v8, v4
+; VERDE-NEXT:    image_load v[4:8], v[0:3], s[0:7] dmask:0xf unorm tfe da
 ; VERDE-NEXT:    s_mov_b32 s11, 0xf000
 ; VERDE-NEXT:    s_mov_b32 s10, -1
 ; VERDE-NEXT:    s_waitcnt vmcnt(0)
-; VERDE-NEXT:    buffer_store_dword v4, off, s[8:11], 0
+; VERDE-NEXT:    v_mov_b32_e32 v0, v4
+; VERDE-NEXT:    v_mov_b32_e32 v1, v5
+; VERDE-NEXT:    v_mov_b32_e32 v2, v6
+; VERDE-NEXT:    v_mov_b32_e32 v3, v7
+; VERDE-NEXT:    buffer_store_dword v8, off, s[8:11], 0
 ; VERDE-NEXT:    s_waitcnt vmcnt(0) expcnt(0)
 ; VERDE-NEXT:    ; return to shader part epilog
 ;
 ; FIJI-LABEL: load_2darraymsaa_tfe:
 ; FIJI:       ; %bb.0: ; %main_body
-; FIJI-NEXT:    v_mov_b32_e32 v5, v0
-; FIJI-NEXT:    v_mov_b32_e32 v0, 0
-; FIJI-NEXT:    v_mov_b32_e32 v8, v3
-; FIJI-NEXT:    v_mov_b32_e32 v7, v2
-; FIJI-NEXT:    v_mov_b32_e32 v6, v1
-; FIJI-NEXT:    v_mov_b32_e32 v1, v0
-; FIJI-NEXT:    v_mov_b32_e32 v2, v0
-; FIJI-NEXT:    v_mov_b32_e32 v3, v0
-; FIJI-NEXT:    v_mov_b32_e32 v4, v0
-; FIJI-NEXT:    image_load v[0:4], v[5:8], s[0:7] dmask:0xf unorm tfe da
+; FIJI-NEXT:    v_mov_b32_e32 v4, 0
+; FIJI-NEXT:    v_mov_b32_e32 v5, v4
+; FIJI-NEXT:    v_mov_b32_e32 v6, v4
+; FIJI-NEXT:    v_mov_b32_e32 v7, v4
+; FIJI-NEXT:    v_mov_b32_e32 v8, v4
+; FIJI-NEXT:    image_load v[4:8], v[0:3], s[0:7] dmask:0xf unorm tfe da
 ; FIJI-NEXT:    s_mov_b32 s11, 0xf000
 ; FIJI-NEXT:    s_mov_b32 s10, -1
 ; FIJI-NEXT:    s_waitcnt vmcnt(0)
-; FIJI-NEXT:    buffer_store_dword v4, off, s[8:11], 0
+; FIJI-NEXT:    v_mov_b32_e32 v0, v4
+; FIJI-NEXT:    v_mov_b32_e32 v1, v5
+; FIJI-NEXT:    v_mov_b32_e32 v2, v6
+; FIJI-NEXT:    v_mov_b32_e32 v3, v7
+; FIJI-NEXT:    buffer_store_dword v8, off, s[8:11], 0
 ; FIJI-NEXT:    s_waitcnt vmcnt(0)
 ; FIJI-NEXT:    ; return to shader part epilog
 ;
@@ -1363,18 +1363,18 @@ define amdgpu_ps <4 x float> @load_2darraymsaa_tfe(<8 x i32> inreg %rsrc, ptr ad
 ; GFX6789-NEXT:    v_mov_b32_e32 v11, v9
 ; GFX6789-NEXT:    v_mov_b32_e32 v12, v9
 ; GFX6789-NEXT:    v_mov_b32_e32 v13, v9
-; GFX6789-NEXT:    v_mov_b32_e32 v8, v3
-; GFX6789-NEXT:    v_mov_b32_e32 v7, v2
-; GFX6789-NEXT:    v_mov_b32_e32 v6, v1
-; GFX6789-NEXT:    v_mov_b32_e32 v5, v0
-; GFX6789-NEXT:    v_mov_b32_e32 v0, v9
-; GFX6789-NEXT:    v_mov_b32_e32 v1, v10
-; GFX6789-NEXT:    v_mov_b32_e32 v2, v11
-; GFX6789-NEXT:    v_mov_b32_e32 v3, v12
-; GFX6789-NEXT:    v_mov_b32_e32 v4, v13
-; GFX6789-NEXT:    image_load v[0:4], v[5:8], s[0:7] dmask:0xf unorm tfe da
+; GFX6789-NEXT:    v_mov_b32_e32 v4, v9
+; GFX6789-NEXT:    v_mov_b32_e32 v5, v10
+; GFX6789-NEXT:    v_mov_b32_e32 v6, v11
+; GFX6789-NEXT:    v_mov_b32_e32 v7, v12
+; GFX6789-NEXT:    v_mov_b32_e32 v8, v13
+; GFX6789-NEXT:    image_load v[4:8], v[0:3], s[0:7] dmask:0xf unorm tfe da
 ; GFX6789-NEXT:    s_waitcnt vmcnt(0)
-; GFX6789-NEXT:    global_store_dword v9, v4, s[8:9]
+; GFX6789-NEXT:    v_mov_b32_e32 v0, v4
+; GFX6789-NEXT:    v_mov_b32_e32 v1, v5
+; GFX6789-NEXT:    v_mov_b32_e32 v2, v6
+; GFX6789-NEXT:    v_mov_b32_e32 v3, v7
+; GFX6789-NEXT:    global_store_dword v9, v8, s[8:9]
 ; GFX6789-NEXT:    s_waitcnt vmcnt(0)
 ; GFX6789-NEXT:    ; return to shader part epilog
 ;

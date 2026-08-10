@@ -3872,37 +3872,37 @@ define amdgpu_kernel void @v_mul_i128(ptr addrspace(1) %out, ptr addrspace(1) %a
 ; VI:       ; %bb.0: ; %entry
 ; VI-NEXT:    s_load_dwordx4 s[0:3], s[4:5], 0x2c
 ; VI-NEXT:    v_lshlrev_b32_e32 v2, 4, v0
-; VI-NEXT:    v_mov_b32_e32 v10, 0
 ; VI-NEXT:    s_waitcnt lgkmcnt(0)
 ; VI-NEXT:    v_mov_b32_e32 v1, s1
 ; VI-NEXT:    v_add_u32_e32 v0, vcc, s0, v2
 ; VI-NEXT:    v_addc_u32_e32 v1, vcc, 0, v1, vcc
 ; VI-NEXT:    v_mov_b32_e32 v3, s3
-; VI-NEXT:    v_add_u32_e32 v12, vcc, s2, v2
-; VI-NEXT:    v_addc_u32_e32 v13, vcc, 0, v3, vcc
-; VI-NEXT:    flat_load_dwordx4 v[0:3], v[0:1]
-; VI-NEXT:    flat_load_dwordx4 v[4:7], v[12:13]
+; VI-NEXT:    v_add_u32_e32 v11, vcc, s2, v2
+; VI-NEXT:    v_addc_u32_e32 v12, vcc, 0, v3, vcc
+; VI-NEXT:    flat_load_dwordx4 v[3:6], v[0:1]
+; VI-NEXT:    flat_load_dwordx4 v[7:10], v[11:12]
+; VI-NEXT:    v_mov_b32_e32 v2, 0
 ; VI-NEXT:    s_waitcnt vmcnt(0)
-; VI-NEXT:    v_mul_lo_u32 v3, v4, v3
-; VI-NEXT:    v_mad_u64_u32 v[14:15], s[0:1], v4, v2, 0
-; VI-NEXT:    v_mad_u64_u32 v[8:9], s[0:1], v0, v4, 0
-; VI-NEXT:    v_mul_lo_u32 v11, v5, v2
-; VI-NEXT:    v_add_u32_e32 v15, vcc, v15, v3
-; VI-NEXT:    v_mad_u64_u32 v[2:3], s[0:1], v1, v4, v[9:10]
-; VI-NEXT:    v_add_u32_e32 v15, vcc, v15, v11
-; VI-NEXT:    v_mul_lo_u32 v4, v7, v0
-; VI-NEXT:    v_mul_lo_u32 v11, v6, v1
-; VI-NEXT:    v_mad_u64_u32 v[6:7], s[0:1], v6, v0, v[14:15]
-; VI-NEXT:    v_mov_b32_e32 v9, v2
-; VI-NEXT:    v_mad_u64_u32 v[9:10], s[0:1], v0, v5, v[9:10]
-; VI-NEXT:    v_add_u32_e32 v4, vcc, v4, v7
-; VI-NEXT:    v_add_u32_e32 v2, vcc, v3, v10
+; VI-NEXT:    v_mul_lo_u32 v6, v7, v6
+; VI-NEXT:    v_mad_u64_u32 v[13:14], s[0:1], v7, v5, 0
+; VI-NEXT:    v_mad_u64_u32 v[0:1], s[0:1], v3, v7, 0
+; VI-NEXT:    v_mul_lo_u32 v15, v8, v5
+; VI-NEXT:    v_add_u32_e32 v14, vcc, v14, v6
+; VI-NEXT:    v_mad_u64_u32 v[5:6], s[0:1], v4, v7, v[1:2]
+; VI-NEXT:    v_add_u32_e32 v14, vcc, v14, v15
+; VI-NEXT:    v_mul_lo_u32 v7, v10, v3
+; VI-NEXT:    v_mul_lo_u32 v15, v9, v4
+; VI-NEXT:    v_mad_u64_u32 v[9:10], s[0:1], v9, v3, v[13:14]
+; VI-NEXT:    v_mov_b32_e32 v1, v5
+; VI-NEXT:    v_mad_u64_u32 v[1:2], s[0:1], v3, v8, v[1:2]
+; VI-NEXT:    v_add_u32_e32 v5, vcc, v7, v10
+; VI-NEXT:    v_add_u32_e32 v2, vcc, v6, v2
 ; VI-NEXT:    v_addc_u32_e64 v3, s[0:1], 0, 0, vcc
-; VI-NEXT:    v_mad_u64_u32 v[0:1], s[0:1], v1, v5, v[2:3]
-; VI-NEXT:    v_add_u32_e32 v2, vcc, v11, v4
-; VI-NEXT:    v_add_u32_e32 v10, vcc, v0, v6
-; VI-NEXT:    v_addc_u32_e32 v11, vcc, v1, v2, vcc
-; VI-NEXT:    flat_store_dwordx4 v[12:13], v[8:11]
+; VI-NEXT:    v_mad_u64_u32 v[2:3], s[0:1], v4, v8, v[2:3]
+; VI-NEXT:    v_add_u32_e32 v4, vcc, v15, v5
+; VI-NEXT:    v_add_u32_e32 v2, vcc, v2, v9
+; VI-NEXT:    v_addc_u32_e32 v3, vcc, v3, v4, vcc
+; VI-NEXT:    flat_store_dwordx4 v[11:12], v[0:3]
 ; VI-NEXT:    s_endpgm
 ;
 ; GFX9-LABEL: v_mul_i128:

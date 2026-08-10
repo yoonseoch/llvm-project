@@ -181,19 +181,17 @@ define <4 x i64> @ashr_v4_metadata(<4 x i64> %arg0, ptr %arg1.ptr) {
 ; CHECK-LABEL: ashr_v4_metadata:
 ; CHECK:       ; %bb.0:
 ; CHECK-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    flat_load_dwordx4 v[12:15], v[8:9]
-; CHECK-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    flat_load_dwordx4 v[15:18], v[8:9] offset:16
-; CHECK-NEXT:    ; kill: killed $vgpr8 killed $vgpr9
+; CHECK-NEXT:    flat_load_dwordx4 v[16:19], v[8:9]
+; CHECK-NEXT:    flat_load_dwordx4 v[12:15], v[8:9] offset:16
 ; CHECK-NEXT:    v_ashrrev_i32_e32 v11, 31, v1
 ; CHECK-NEXT:    v_ashrrev_i32_e32 v9, 31, v3
 ; CHECK-NEXT:    v_ashrrev_i32_e32 v10, 31, v5
 ; CHECK-NEXT:    v_ashrrev_i32_e32 v8, 31, v7
-; CHECK-NEXT:    v_ashrrev_i32_e32 v0, v12, v1
-; CHECK-NEXT:    v_ashrrev_i32_e32 v2, v14, v3
 ; CHECK-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    v_ashrrev_i32_e32 v4, v15, v5
-; CHECK-NEXT:    v_ashrrev_i32_e32 v6, v17, v7
+; CHECK-NEXT:    v_ashrrev_i32_e32 v0, v16, v1
+; CHECK-NEXT:    v_ashrrev_i32_e32 v2, v18, v3
+; CHECK-NEXT:    v_ashrrev_i32_e32 v4, v12, v5
+; CHECK-NEXT:    v_ashrrev_i32_e32 v6, v14, v7
 ; CHECK-NEXT:    v_mov_b32_e32 v1, v11
 ; CHECK-NEXT:    v_mov_b32_e32 v3, v9
 ; CHECK-NEXT:    v_mov_b32_e32 v5, v10

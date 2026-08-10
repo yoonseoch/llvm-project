@@ -853,40 +853,40 @@ define amdgpu_kernel void @mul_v8half(ptr addrspace(1) %out, ptr addrspace(1) %i
 ; NOSDWA-NEXT:    s_load_dwordx4 s[0:3], s[4:5], 0x24
 ; NOSDWA-NEXT:    s_load_dwordx2 s[4:5], s[4:5], 0x34
 ; NOSDWA-NEXT:    s_waitcnt lgkmcnt(0)
-; NOSDWA-NEXT:    v_mov_b32_e32 v4, s2
-; NOSDWA-NEXT:    v_mov_b32_e32 v5, s3
-; NOSDWA-NEXT:    v_mov_b32_e32 v0, s4
-; NOSDWA-NEXT:    v_mov_b32_e32 v1, s5
+; NOSDWA-NEXT:    v_mov_b32_e32 v0, s2
+; NOSDWA-NEXT:    v_mov_b32_e32 v1, s3
+; NOSDWA-NEXT:    v_mov_b32_e32 v2, s4
+; NOSDWA-NEXT:    v_mov_b32_e32 v3, s5
+; NOSDWA-NEXT:    flat_load_dwordx4 v[4:7], v[2:3]
 ; NOSDWA-NEXT:    flat_load_dwordx4 v[0:3], v[0:1]
-; NOSDWA-NEXT:    flat_load_dwordx4 v[4:7], v[4:5]
 ; NOSDWA-NEXT:    v_mov_b32_e32 v8, s0
 ; NOSDWA-NEXT:    v_mov_b32_e32 v9, s1
 ; NOSDWA-NEXT:    s_waitcnt vmcnt(1)
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v10, 16, v3
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v10, 16, v7
 ; NOSDWA-NEXT:    s_waitcnt vmcnt(0)
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v11, 16, v7
-; NOSDWA-NEXT:    v_mul_f16_e32 v3, v7, v3
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v7, 16, v2
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v12, 16, v6
-; NOSDWA-NEXT:    v_mul_f16_e32 v2, v6, v2
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v6, 16, v1
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v13, 16, v5
-; NOSDWA-NEXT:    v_mul_f16_e32 v1, v5, v1
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v5, 16, v0
-; NOSDWA-NEXT:    v_mul_f16_e32 v0, v4, v0
-; NOSDWA-NEXT:    v_lshrrev_b32_e32 v4, 16, v4
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v11, 16, v3
+; NOSDWA-NEXT:    v_mul_f16_e32 v3, v3, v7
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v7, 16, v6
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v12, 16, v2
+; NOSDWA-NEXT:    v_mul_f16_e32 v2, v2, v6
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v6, 16, v5
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v13, 16, v1
+; NOSDWA-NEXT:    v_mul_f16_e32 v1, v1, v5
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v5, 16, v4
+; NOSDWA-NEXT:    v_mul_f16_e32 v4, v0, v4
+; NOSDWA-NEXT:    v_lshrrev_b32_e32 v0, 16, v0
 ; NOSDWA-NEXT:    v_mul_f16_e32 v10, v11, v10
 ; NOSDWA-NEXT:    v_mul_f16_e32 v7, v12, v7
 ; NOSDWA-NEXT:    v_mul_f16_e32 v6, v13, v6
-; NOSDWA-NEXT:    v_mul_f16_e32 v4, v4, v5
+; NOSDWA-NEXT:    v_mul_f16_e32 v0, v0, v5
 ; NOSDWA-NEXT:    v_lshlrev_b32_e32 v5, 16, v10
 ; NOSDWA-NEXT:    v_lshlrev_b32_e32 v7, 16, v7
 ; NOSDWA-NEXT:    v_lshlrev_b32_e32 v6, 16, v6
-; NOSDWA-NEXT:    v_lshlrev_b32_e32 v4, 16, v4
+; NOSDWA-NEXT:    v_lshlrev_b32_e32 v0, 16, v0
 ; NOSDWA-NEXT:    v_or_b32_e32 v3, v3, v5
 ; NOSDWA-NEXT:    v_or_b32_e32 v2, v2, v7
 ; NOSDWA-NEXT:    v_or_b32_e32 v1, v1, v6
-; NOSDWA-NEXT:    v_or_b32_e32 v0, v0, v4
+; NOSDWA-NEXT:    v_or_b32_e32 v0, v4, v0
 ; NOSDWA-NEXT:    flat_store_dwordx4 v[8:9], v[0:3]
 ; NOSDWA-NEXT:    s_endpgm
 ;

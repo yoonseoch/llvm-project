@@ -1445,16 +1445,16 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32(ptr addrspace(1) %out, <8 x do
 ; VI-GISEL-NEXT:    s_mov_b32 s2, -1
 ; VI-GISEL-NEXT:    s_mov_b32 s3, 0xf000
 ; VI-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
-; VI-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0
-; VI-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0 offset:16
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
+; VI-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0
+; VI-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0 offset:16
 ; VI-GISEL-NEXT:    s_endpgm
 ;
 ; GFX10-SDAG-LABEL: fptrunc_v8f64_to_v8f32:
@@ -1485,16 +1485,16 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32(ptr addrspace(1) %out, <8 x do
 ; GFX10-GISEL-NEXT:    s_mov_b32 s2, -1
 ; GFX10-GISEL-NEXT:    s_mov_b32 s3, 0x31016000
 ; GFX10-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
-; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0
-; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0 offset:16
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
+; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0
+; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0 offset:16
 ; GFX10-GISEL-NEXT:    s_endpgm
 ;
 ; GFX11-SDAG-LABEL: fptrunc_v8f64_to_v8f32:
@@ -1526,17 +1526,17 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32(ptr addrspace(1) %out, <8 x do
 ; GFX11-GISEL-NEXT:    s_mov_b32 s2, -1
 ; GFX11-GISEL-NEXT:    s_mov_b32 s3, 0x31016000
 ; GFX11-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
 ; GFX11-GISEL-NEXT:    s_clause 0x1
-; GFX11-GISEL-NEXT:    buffer_store_b128 v[0:3], off, s[0:3], 0
-; GFX11-GISEL-NEXT:    buffer_store_b128 v[4:7], off, s[0:3], 0 offset:16
+; GFX11-GISEL-NEXT:    buffer_store_b128 v[4:7], off, s[0:3], 0
+; GFX11-GISEL-NEXT:    buffer_store_b128 v[0:3], off, s[0:3], 0 offset:16
 ; GFX11-GISEL-NEXT:    s_endpgm
   %result = fptrunc <8 x double> %in to <8 x float>
   store <8 x float> %result, ptr addrspace(1) %out
@@ -1589,16 +1589,16 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32_afn(ptr addrspace(1) %out, <8 
 ; VI-GISEL-NEXT:    s_mov_b32 s2, -1
 ; VI-GISEL-NEXT:    s_mov_b32 s3, 0xf000
 ; VI-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
-; VI-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0
-; VI-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0 offset:16
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; VI-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
+; VI-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0
+; VI-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0 offset:16
 ; VI-GISEL-NEXT:    s_endpgm
 ;
 ; GFX10-SDAG-LABEL: fptrunc_v8f64_to_v8f32_afn:
@@ -1629,16 +1629,16 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32_afn(ptr addrspace(1) %out, <8 
 ; GFX10-GISEL-NEXT:    s_mov_b32 s2, -1
 ; GFX10-GISEL-NEXT:    s_mov_b32 s3, 0x31016000
 ; GFX10-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
-; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0
-; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0 offset:16
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; GFX10-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
+; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[4:7], off, s[0:3], 0
+; GFX10-GISEL-NEXT:    buffer_store_dwordx4 v[0:3], off, s[0:3], 0 offset:16
 ; GFX10-GISEL-NEXT:    s_endpgm
 ;
 ; GFX11-SDAG-LABEL: fptrunc_v8f64_to_v8f32_afn:
@@ -1670,17 +1670,17 @@ define amdgpu_kernel void @fptrunc_v8f64_to_v8f32_afn(ptr addrspace(1) %out, <8 
 ; GFX11-GISEL-NEXT:    s_mov_b32 s2, -1
 ; GFX11-GISEL-NEXT:    s_mov_b32 s3, 0x31016000
 ; GFX11-GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[8:9]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[10:11]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[12:13]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[14:15]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[16:17]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[18:19]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[20:21]
-; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[22:23]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v4, s[8:9]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v5, s[10:11]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v6, s[12:13]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v7, s[14:15]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v0, s[16:17]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v1, s[18:19]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v2, s[20:21]
+; GFX11-GISEL-NEXT:    v_cvt_f32_f64_e32 v3, s[22:23]
 ; GFX11-GISEL-NEXT:    s_clause 0x1
-; GFX11-GISEL-NEXT:    buffer_store_b128 v[0:3], off, s[0:3], 0
-; GFX11-GISEL-NEXT:    buffer_store_b128 v[4:7], off, s[0:3], 0 offset:16
+; GFX11-GISEL-NEXT:    buffer_store_b128 v[4:7], off, s[0:3], 0
+; GFX11-GISEL-NEXT:    buffer_store_b128 v[0:3], off, s[0:3], 0 offset:16
 ; GFX11-GISEL-NEXT:    s_endpgm
   %result = fptrunc <8 x double> %in to <8 x float>
   store <8 x float> %result, ptr addrspace(1) %out

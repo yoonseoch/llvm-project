@@ -530,71 +530,70 @@ define amdgpu_kernel void @v_extractelement_v16i16_dynamic_sgpr(ptr addrspace(1)
 ; GCN-NEXT:    s_load_dword s8, s[4:5], 0xd
 ; GCN-NEXT:    s_mov_b32 s7, 0xf000
 ; GCN-NEXT:    s_mov_b32 s6, 0
-; GCN-NEXT:    v_lshlrev_b32_e32 v8, 5, v0
+; GCN-NEXT:    v_lshlrev_b32_e32 v9, 5, v0
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_mov_b64 s[4:5], s[2:3]
-; GCN-NEXT:    v_mov_b32_e32 v9, 0
-; GCN-NEXT:    buffer_load_dwordx4 v[1:4], v[8:9], s[4:7], 0 addr64
-; GCN-NEXT:    buffer_load_dwordx4 v[5:8], v[8:9], s[4:7], 0 addr64 offset:16
+; GCN-NEXT:    v_mov_b32_e32 v10, 0
+; GCN-NEXT:    buffer_load_dwordx4 v[5:8], v[9:10], s[4:7], 0 addr64
+; GCN-NEXT:    buffer_load_dwordx4 v[1:4], v[9:10], s[4:7], 0 addr64 offset:16
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 1
-; GCN-NEXT:    v_lshlrev_b32_e32 v10, 1, v0
+; GCN-NEXT:    v_lshlrev_b32_e32 v9, 1, v0
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 2
-; GCN-NEXT:    v_mov_b32_e32 v11, v9
 ; GCN-NEXT:    s_mov_b64 s[2:3], s[6:7]
 ; GCN-NEXT:    s_waitcnt vmcnt(1)
-; GCN-NEXT:    v_lshrrev_b32_e32 v0, 16, v1
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v1, v0, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v0, 16, v5
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v5, v0, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 3
-; GCN-NEXT:    v_lshrrev_b32_e32 v9, 16, v2
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v2, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v11, 16, v6
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v6, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 4
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v9, vcc
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v11, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 5
-; GCN-NEXT:    v_lshrrev_b32_e32 v12, 16, v3
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v3, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v12, 16, v7
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v7, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 6
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v12, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 7
-; GCN-NEXT:    v_lshrrev_b32_e32 v13, 16, v4
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v4, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v13, 16, v8
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v8, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 8
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v13, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 9
 ; GCN-NEXT:    s_waitcnt vmcnt(0)
-; GCN-NEXT:    v_lshrrev_b32_e32 v14, 16, v5
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v5, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v14, 16, v1
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v1, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 10
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v14, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 11
-; GCN-NEXT:    v_lshrrev_b32_e32 v15, 16, v6
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v6, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v15, 16, v2
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v2, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 12
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v15, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 13
-; GCN-NEXT:    v_lshrrev_b32_e32 v16, 16, v7
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v7, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v16, 16, v3
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v3, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 14
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v16, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    s_cmp_eq_u32 s8, 15
-; GCN-NEXT:    v_lshrrev_b32_e32 v17, 16, v8
-; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v8, vcc
+; GCN-NEXT:    v_lshrrev_b32_e32 v17, 16, v4
+; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v4, vcc
 ; GCN-NEXT:    s_cselect_b64 vcc, -1, 0
 ; GCN-NEXT:    v_cndmask_b32_e32 v0, v0, v17, vcc
-; GCN-NEXT:    buffer_store_short v0, v[10:11], s[0:3], 0 addr64
+; GCN-NEXT:    buffer_store_short v0, v[9:10], s[0:3], 0 addr64
 ; GCN-NEXT:    s_endpgm
   %tid = call i32 @llvm.amdgcn.workitem.id.x() #1
   %tid.ext = sext i32 %tid to i64

@@ -2773,27 +2773,39 @@ define void @shuffle_v8f16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1
 }
 
 define void @shuffle_v16f16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v16f16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v16f16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v16f16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v16f16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v16f16_concat:
@@ -2814,58 +2826,76 @@ define void @shuffle_v16f16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg
 }
 
 define void @shuffle_v32f16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v32f16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
-; GFX9-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX9-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v32f16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v32f16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX942-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
+; GFX942-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v32f16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(3)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
 ; GFX10-NEXT:    s_waitcnt vmcnt(2)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v32f16_concat:
 ; GFX11:       ; %bb.0:
 ; GFX11-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[6:9], v[2:3], off
+; GFX11-NEXT:    global_load_b128 v[14:17], v[2:3], off
 ; GFX11-NEXT:    global_load_b128 v[10:13], v[2:3], off offset:16
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[14:17], v[0:1], off
+; GFX11-NEXT:    global_load_b128 v[6:9], v[0:1], off
 ; GFX11-NEXT:    global_load_b128 v[0:3], v[0:1], off offset:16
 ; GFX11-NEXT:    s_waitcnt vmcnt(3)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off offset:32
+; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off offset:32
 ; GFX11-NEXT:    s_waitcnt vmcnt(2)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[10:13], off offset:48
 ; GFX11-NEXT:    s_waitcnt vmcnt(1)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off
+; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[0:3], off offset:16
 ; GFX11-NEXT:    s_setpc_b64 s[30:31]
@@ -2912,27 +2942,39 @@ define void @shuffle_v8i16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1
 }
 
 define void @shuffle_v16i16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v16i16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v16i16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v16i16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v16i16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v16i16_concat:
@@ -2953,58 +2995,76 @@ define void @shuffle_v16i16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg
 }
 
 define void @shuffle_v32i16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v32i16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
-; GFX9-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX9-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v32i16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v32i16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX942-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
+; GFX942-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v32i16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(3)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
 ; GFX10-NEXT:    s_waitcnt vmcnt(2)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v32i16_concat:
 ; GFX11:       ; %bb.0:
 ; GFX11-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[6:9], v[2:3], off
+; GFX11-NEXT:    global_load_b128 v[14:17], v[2:3], off
 ; GFX11-NEXT:    global_load_b128 v[10:13], v[2:3], off offset:16
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[14:17], v[0:1], off
+; GFX11-NEXT:    global_load_b128 v[6:9], v[0:1], off
 ; GFX11-NEXT:    global_load_b128 v[0:3], v[0:1], off offset:16
 ; GFX11-NEXT:    s_waitcnt vmcnt(3)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off offset:32
+; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off offset:32
 ; GFX11-NEXT:    s_waitcnt vmcnt(2)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[10:13], off offset:48
 ; GFX11-NEXT:    s_waitcnt vmcnt(1)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off
+; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[0:3], off offset:16
 ; GFX11-NEXT:    s_setpc_b64 s[30:31]
@@ -3143,27 +3203,39 @@ define void @shuffle_v16i8_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1
 }
 
 define void @shuffle_v32i8_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v32i8_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v32i8_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v32i8_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v32i8_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v32i8_concat:
@@ -3219,27 +3291,39 @@ define void @shuffle_v4i32_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1
 }
 
 define void @shuffle_v8i32_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v8i32_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v8i32_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v8i32_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v8i32_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v8i32_concat:
@@ -3260,58 +3344,76 @@ define void @shuffle_v8i32_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1
 }
 
 define void @shuffle_v16i32_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v16i32_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
-; GFX9-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX9-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v16i32_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v16i32_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX942-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
+; GFX942-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v16i32_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(3)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
 ; GFX10-NEXT:    s_waitcnt vmcnt(2)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v16i32_concat:
 ; GFX11:       ; %bb.0:
 ; GFX11-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[6:9], v[2:3], off
+; GFX11-NEXT:    global_load_b128 v[14:17], v[2:3], off
 ; GFX11-NEXT:    global_load_b128 v[10:13], v[2:3], off offset:16
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[14:17], v[0:1], off
+; GFX11-NEXT:    global_load_b128 v[6:9], v[0:1], off
 ; GFX11-NEXT:    global_load_b128 v[0:3], v[0:1], off offset:16
 ; GFX11-NEXT:    s_waitcnt vmcnt(3)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off offset:32
+; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off offset:32
 ; GFX11-NEXT:    s_waitcnt vmcnt(2)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[10:13], off offset:48
 ; GFX11-NEXT:    s_waitcnt vmcnt(1)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off
+; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[0:3], off offset:16
 ; GFX11-NEXT:    s_setpc_b64 s[30:31]
@@ -6058,27 +6160,39 @@ define void @shuffle_v8bf16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg
 }
 
 define void @shuffle_v16bf16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v16bf16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(1)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v16bf16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(1)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v16bf16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(1)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v16bf16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v16bf16_concat:
@@ -6099,58 +6213,76 @@ define void @shuffle_v16bf16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %ar
 }
 
 define void @shuffle_v32bf16_concat(ptr addrspace(1) %arg0, ptr addrspace(1) %arg1, ptr addrspace(1) %out) {
-; GFX9-LABEL: shuffle_v32bf16_concat:
-; GFX9:       ; %bb.0:
-; GFX9-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX9-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX9-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
-; GFX9-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX9-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
-; GFX9-NEXT:    s_waitcnt vmcnt(3)
-; GFX9-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
-; GFX9-NEXT:    s_waitcnt vmcnt(0)
-; GFX9-NEXT:    s_setpc_b64 s[30:31]
+; GX900-LABEL: shuffle_v32bf16_concat:
+; GX900:       ; %bb.0:
+; GX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GX900-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GX900-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
+; GX900-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
+; GX900-NEXT:    s_waitcnt vmcnt(3)
+; GX900-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
+; GX900-NEXT:    s_waitcnt vmcnt(0)
+; GX900-NEXT:    s_setpc_b64 s[30:31]
+;
+; GFX942-LABEL: shuffle_v32bf16_concat:
+; GFX942:       ; %bb.0:
+; GFX942-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+; GFX942-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
+; GFX942-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX942-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
+; GFX942-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX942-NEXT:    s_waitcnt vmcnt(3)
+; GFX942-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX942-NEXT:    s_waitcnt vmcnt(0)
+; GFX942-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX10-LABEL: shuffle_v32bf16_concat:
 ; GFX10:       ; %bb.0:
 ; GFX10-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[2:3], off
-; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[2:3], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[2:3], off
+; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[2:3], off offset:16
 ; GFX10-NEXT:    s_clause 0x1
-; GFX10-NEXT:    global_load_dwordx4 v[14:17], v[0:1], off
-; GFX10-NEXT:    global_load_dwordx4 v[18:21], v[0:1], off offset:16
+; GFX10-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off
+; GFX10-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off offset:16
 ; GFX10-NEXT:    s_waitcnt vmcnt(3)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:32
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:32
 ; GFX10-NEXT:    s_waitcnt vmcnt(2)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off offset:48
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off offset:48
 ; GFX10-NEXT:    s_waitcnt vmcnt(1)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[14:17], off
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[10:13], off
 ; GFX10-NEXT:    s_waitcnt vmcnt(0)
-; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[18:21], off offset:16
+; GFX10-NEXT:    global_store_dwordx4 v[4:5], v[6:9], off offset:16
 ; GFX10-NEXT:    s_setpc_b64 s[30:31]
 ;
 ; GFX11-LABEL: shuffle_v32bf16_concat:
 ; GFX11:       ; %bb.0:
 ; GFX11-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[6:9], v[2:3], off
+; GFX11-NEXT:    global_load_b128 v[14:17], v[2:3], off
 ; GFX11-NEXT:    global_load_b128 v[10:13], v[2:3], off offset:16
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    global_load_b128 v[14:17], v[0:1], off
+; GFX11-NEXT:    global_load_b128 v[6:9], v[0:1], off
 ; GFX11-NEXT:    global_load_b128 v[0:3], v[0:1], off offset:16
 ; GFX11-NEXT:    s_waitcnt vmcnt(3)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off offset:32
+; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off offset:32
 ; GFX11-NEXT:    s_waitcnt vmcnt(2)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[10:13], off offset:48
 ; GFX11-NEXT:    s_waitcnt vmcnt(1)
-; GFX11-NEXT:    global_store_b128 v[4:5], v[14:17], off
+; GFX11-NEXT:    global_store_b128 v[4:5], v[6:9], off
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
 ; GFX11-NEXT:    global_store_b128 v[4:5], v[0:3], off offset:16
 ; GFX11-NEXT:    s_setpc_b64 s[30:31]

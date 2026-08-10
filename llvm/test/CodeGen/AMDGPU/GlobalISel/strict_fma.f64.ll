@@ -722,15 +722,14 @@ define void @v_constained_fma_v4f64_fpexcept_strict_div(<4 x double> %x, <4 x do
 ; GFX8-LABEL: v_constained_fma_v4f64_fpexcept_strict_div:
 ; GFX8:       ; %bb.0:
 ; GFX8-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX8-NEXT:    v_fma_f64 v[0:1], v[0:1], v[8:9], v[16:17]
-; GFX8-NEXT:    v_fma_f64 v[2:3], v[2:3], v[10:11], v[18:19]
-; GFX8-NEXT:    v_fma_f64 v[4:5], v[4:5], v[12:13], v[20:21]
-; GFX8-NEXT:    v_fma_f64 v[6:7], v[6:7], v[14:15], v[22:23]
-; GFX8-NEXT:    flat_store_dwordx4 v[24:25], v[0:3]
-; GFX8-NEXT:    s_nop 0
-; GFX8-NEXT:    v_add_u32_e32 v0, vcc, 16, v24
-; GFX8-NEXT:    v_addc_u32_e32 v1, vcc, 0, v25, vcc
-; GFX8-NEXT:    flat_store_dwordx4 v[0:1], v[4:7]
+; GFX8-NEXT:    v_fma_f64 v[8:9], v[0:1], v[8:9], v[16:17]
+; GFX8-NEXT:    v_fma_f64 v[10:11], v[2:3], v[10:11], v[18:19]
+; GFX8-NEXT:    v_fma_f64 v[0:1], v[4:5], v[12:13], v[20:21]
+; GFX8-NEXT:    v_fma_f64 v[2:3], v[6:7], v[14:15], v[22:23]
+; GFX8-NEXT:    v_add_u32_e32 v4, vcc, 16, v24
+; GFX8-NEXT:    v_addc_u32_e32 v5, vcc, 0, v25, vcc
+; GFX8-NEXT:    flat_store_dwordx4 v[24:25], v[8:11]
+; GFX8-NEXT:    flat_store_dwordx4 v[4:5], v[0:3]
 ; GFX8-NEXT:    s_waitcnt vmcnt(0)
 ; GFX8-NEXT:    s_setpc_b64 s[30:31]
 ;

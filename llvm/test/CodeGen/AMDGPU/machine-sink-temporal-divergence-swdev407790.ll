@@ -407,29 +407,29 @@ define protected amdgpu_kernel void @kernel_round1(ptr addrspace(1) nocapture no
 ; CHECK-NEXT:    v_and_b32_e32 v72, 31, v0
 ; CHECK-NEXT:    v_mul_u32_u24_e32 v1, 0x180, v63
 ; CHECK-NEXT:    v_lshlrev_b32_e32 v0, 5, v62
-; CHECK-NEXT:    v_lshlrev_b32_e32 v4, 5, v72
-; CHECK-NEXT:    v_add_co_u32 v2, s4, s64, v1
-; CHECK-NEXT:    v_add_co_ci_u32_e64 v3, null, s65, 0, s4
-; CHECK-NEXT:    v_add_co_u32 v0, vcc_lo, v2, v0
-; CHECK-NEXT:    v_add_co_ci_u32_e64 v1, null, 0, v3, vcc_lo
-; CHECK-NEXT:    v_add_co_u32 v2, vcc_lo, v2, v4
-; CHECK-NEXT:    v_add_co_ci_u32_e64 v3, null, 0, v3, vcc_lo
+; CHECK-NEXT:    v_lshlrev_b32_e32 v3, 5, v72
+; CHECK-NEXT:    v_add_co_u32 v1, s4, s64, v1
+; CHECK-NEXT:    v_add_co_ci_u32_e64 v2, null, s65, 0, s4
+; CHECK-NEXT:    v_add_co_u32 v8, vcc_lo, v1, v0
+; CHECK-NEXT:    v_add_co_ci_u32_e64 v9, null, 0, v2, vcc_lo
+; CHECK-NEXT:    v_add_co_u32 v10, vcc_lo, v1, v3
+; CHECK-NEXT:    v_add_co_ci_u32_e64 v11, null, 0, v2, vcc_lo
 ; CHECK-NEXT:    s_clause 0x1
-; CHECK-NEXT:    global_load_dwordx4 v[4:7], v[0:1], off offset:8
-; CHECK-NEXT:    global_load_dwordx4 v[8:11], v[2:3], off offset:8
+; CHECK-NEXT:    global_load_dwordx4 v[0:3], v[8:9], off offset:8
+; CHECK-NEXT:    global_load_dwordx4 v[4:7], v[10:11], off offset:8
 ; CHECK-NEXT:    s_waitcnt vmcnt(0)
-; CHECK-NEXT:    v_xor_b32_e32 v57, v9, v5
-; CHECK-NEXT:    v_xor_b32_e32 v56, v8, v4
-; CHECK-NEXT:    v_xor_b32_e32 v46, v11, v7
-; CHECK-NEXT:    v_xor_b32_e32 v45, v10, v6
-; CHECK-NEXT:    v_or_b32_e32 v5, v57, v46
-; CHECK-NEXT:    v_or_b32_e32 v4, v56, v45
-; CHECK-NEXT:    v_cmpx_ne_u64_e32 0, v[4:5]
+; CHECK-NEXT:    v_xor_b32_e32 v57, v5, v1
+; CHECK-NEXT:    v_xor_b32_e32 v56, v4, v0
+; CHECK-NEXT:    v_xor_b32_e32 v46, v7, v3
+; CHECK-NEXT:    v_xor_b32_e32 v45, v6, v2
+; CHECK-NEXT:    v_or_b32_e32 v1, v57, v46
+; CHECK-NEXT:    v_or_b32_e32 v0, v56, v45
+; CHECK-NEXT:    v_cmpx_ne_u64_e32 0, v[0:1]
 ; CHECK-NEXT:    s_cbranch_execz .LBB0_27
 ; CHECK-NEXT:  ; %bb.29: ; in Loop: Header=BB0_28 Depth=1
 ; CHECK-NEXT:    s_clause 0x1
-; CHECK-NEXT:    global_load_dwordx2 v[58:59], v[2:3], off offset:24
-; CHECK-NEXT:    global_load_dwordx2 v[60:61], v[0:1], off offset:24
+; CHECK-NEXT:    global_load_dwordx2 v[58:59], v[10:11], off offset:24
+; CHECK-NEXT:    global_load_dwordx2 v[60:61], v[8:9], off offset:24
 ; CHECK-NEXT:    v_lshlrev_b32_e32 v0, 4, v56
 ; CHECK-NEXT:    v_alignbit_b32 v1, v57, v56, 12
 ; CHECK-NEXT:    v_and_b32_e32 v2, 0xf0000, v56
@@ -463,34 +463,34 @@ define protected amdgpu_kernel void @kernel_round1(ptr addrspace(1) nocapture no
 ; CHECK-NEXT:    s_mov_b64 s[4:5], s[48:49]
 ; CHECK-NEXT:    v_mov_b32_e32 v1, v43
 ; CHECK-NEXT:    s_swappc_b64 s[30:31], s[16:17]
-; CHECK-NEXT:    v_bfe_u32 v0, v0, v74, 4
+; CHECK-NEXT:    v_bfe_u32 v4, v0, v74, 4
 ; CHECK-NEXT:    s_mov_b32 s4, exec_lo
-; CHECK-NEXT:    v_cmpx_gt_u32_e32 12, v0
+; CHECK-NEXT:    v_cmpx_gt_u32_e32 12, v4
 ; CHECK-NEXT:    s_xor_b32 s4, exec_lo, s4
 ; CHECK-NEXT:    s_cbranch_execz .LBB0_31
 ; CHECK-NEXT:  ; %bb.30: ; in Loop: Header=BB0_28 Depth=1
 ; CHECK-NEXT:    v_xor_b32_e32 v5, v60, v58
-; CHECK-NEXT:    v_lshrrev_b64 v[3:4], 16, v[45:46]
+; CHECK-NEXT:    v_lshrrev_b64 v[2:3], 16, v[45:46]
 ; CHECK-NEXT:    v_mad_u64_u32 v[7:8], null, 0x180, v73, s[66:67]
-; CHECK-NEXT:    v_lshlrev_b32_e32 v0, 5, v0
-; CHECK-NEXT:    v_lshrrev_b64 v[1:2], 16, v[56:57]
+; CHECK-NEXT:    v_xor_b32_e32 v6, v61, v59
+; CHECK-NEXT:    v_lshlrev_b32_e32 v12, 5, v4
 ; CHECK-NEXT:    v_lshlrev_b32_e32 v10, 16, v5
+; CHECK-NEXT:    v_lshrrev_b64 v[0:1], 16, v[56:57]
 ; CHECK-NEXT:    v_lshlrev_b32_e32 v9, 6, v72
 ; CHECK-NEXT:    v_lshlrev_b32_e32 v11, 12, v63
-; CHECK-NEXT:    v_xor_b32_e32 v6, v61, v59
+; CHECK-NEXT:    v_lshrrev_b64 v[4:5], 16, v[5:6]
+; CHECK-NEXT:    v_or_b32_e32 v3, v10, v3
+; CHECK-NEXT:    v_lshlrev_b32_e32 v10, 16, v45
+; CHECK-NEXT:    v_add_co_u32 v6, vcc_lo, v7, v12
+; CHECK-NEXT:    v_or3_b32 v9, v9, v11, v62
+; CHECK-NEXT:    v_add_co_ci_u32_e64 v7, null, 0, v8, vcc_lo
+; CHECK-NEXT:    v_or_b32_e32 v1, v10, v1
 ; CHECK-NEXT:    ; implicit-def: $vgpr42
 ; CHECK-NEXT:    ; implicit-def: $vgpr43
 ; CHECK-NEXT:    ; implicit-def: $vgpr44
-; CHECK-NEXT:    v_add_co_u32 v7, vcc_lo, v7, v0
-; CHECK-NEXT:    v_or_b32_e32 v4, v10, v4
-; CHECK-NEXT:    v_lshlrev_b32_e32 v10, 16, v45
-; CHECK-NEXT:    v_or3_b32 v9, v9, v11, v62
-; CHECK-NEXT:    v_add_co_ci_u32_e64 v8, null, 0, v8, vcc_lo
-; CHECK-NEXT:    v_lshrrev_b64 v[5:6], 16, v[5:6]
-; CHECK-NEXT:    v_or_b32_e32 v2, v10, v2
-; CHECK-NEXT:    global_store_dword v[7:8], v9, off offset:4
-; CHECK-NEXT:    global_store_dwordx4 v[7:8], v[1:4], off offset:8
-; CHECK-NEXT:    global_store_dwordx2 v[7:8], v[5:6], off offset:24
+; CHECK-NEXT:    global_store_dword v[6:7], v9, off offset:4
+; CHECK-NEXT:    global_store_dwordx4 v[6:7], v[0:3], off offset:8
+; CHECK-NEXT:    global_store_dwordx2 v[6:7], v[4:5], off offset:24
 ; CHECK-NEXT:  .LBB0_31: ; %Flow
 ; CHECK-NEXT:    ; in Loop: Header=BB0_28 Depth=1
 ; CHECK-NEXT:    s_andn2_saveexec_b32 s4, s4

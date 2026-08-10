@@ -1297,23 +1297,22 @@ define <8 x i1> @vector_f32_ole() {
 ; GISEL-GFX1150:       ; %bb.0: ; %entry
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v4, 16 :: v_dual_mov_b32 v5, 0
-; GISEL-GFX1150-NEXT:    s_clause 0x1
+; GISEL-GFX1150-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
 ; GISEL-GFX1150-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; GISEL-GFX1150-NEXT:    global_load_b128 v[4:7], v[4:5], off
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(1)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s0, v0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s1, v1
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s2, v2
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s3, v3
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s4, v4
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s0, v4
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s1, v5
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s2, v6
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s3, v7
 ; GISEL-GFX1150-NEXT:    s_cmp_le_f32 s0, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s5, v5
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s6, v6
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s7, v7
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s4, v0
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s5, v1
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s0, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_le_f32 s1, 0
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s6, v2
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s7, v3
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s1, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_le_f32 s2, 0
 ; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, s0 :: v_dual_mov_b32 v1, s1
@@ -1382,23 +1381,22 @@ define <8 x i1> @vector_f32_ole() {
 ; GISEL-GFX1200-NEXT:    s_wait_bvhcnt 0x0
 ; GISEL-GFX1200-NEXT:    s_wait_kmcnt 0x0
 ; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v4, 16 :: v_dual_mov_b32 v5, 0
-; GISEL-GFX1200-NEXT:    s_clause 0x1
+; GISEL-GFX1200-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
 ; GISEL-GFX1200-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; GISEL-GFX1200-NEXT:    global_load_b128 v[4:7], v[4:5], off
 ; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x1
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s0, v0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s1, v1
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s2, v2
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s3, v3
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s4, v4
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s0, v4
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s1, v5
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s2, v6
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s3, v7
 ; GISEL-GFX1200-NEXT:    s_cmp_le_f32 s0, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s5, v5
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s6, v6
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s7, v7
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s4, v0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s5, v1
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s0, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_le_f32 s1, 0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s6, v2
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s7, v3
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s1, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_le_f32 s2, 0
 ; GISEL-GFX1200-NEXT:    s_wait_alu depctr_sa_sdst(0)
@@ -1529,42 +1527,42 @@ define <32 x i1> @vector_f32_ueq() {
 ; SDAG-GFX1150:       ; %bb.0: ; %entry
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v0, 48 :: v_dual_mov_b32 v1, 0
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v4, 64 :: v_dual_mov_b32 v5, 0
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v8, 32 :: v_dual_mov_b32 v9, 0
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v2, 64 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v28, 0x70 :: v_dual_mov_b32 v29, 0
+; SDAG-GFX1150-NEXT:    s_clause 0x1
+; SDAG-GFX1150-NEXT:    global_load_b128 v[12:15], v[0:1], off
+; SDAG-GFX1150-NEXT:    global_load_b128 v[16:19], v[2:3], off
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v0, 32 :: v_dual_mov_b32 v1, 0
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v2, 0x50 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1150-NEXT:    s_clause 0x1
+; SDAG-GFX1150-NEXT:    global_load_b128 v[8:11], v[0:1], off
+; SDAG-GFX1150-NEXT:    global_load_b128 v[20:23], v[2:3], off
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v2, 0x60 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1150-NEXT:    s_clause 0x1
+; SDAG-GFX1150-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; SDAG-GFX1150-NEXT:    global_load_b128 v[24:27], v[2:3], off
+; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
 ; SDAG-GFX1150-NEXT:    s_clause 0x1
 ; SDAG-GFX1150-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; SDAG-GFX1150-NEXT:    global_load_b128 v[4:7], v[4:5], off
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v12, 0x50 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1150-NEXT:    s_clause 0x1
-; SDAG-GFX1150-NEXT:    global_load_b128 v[8:11], v[8:9], off
-; SDAG-GFX1150-NEXT:    global_load_b128 v[20:23], v[12:13], off
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v12, 16 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v14, 0x60 :: v_dual_mov_b32 v15, 0
-; SDAG-GFX1150-NEXT:    s_clause 0x1
-; SDAG-GFX1150-NEXT:    global_load_b128 v[27:30], v[12:13], off
-; SDAG-GFX1150-NEXT:    global_load_b128 v[31:34], v[14:15], off
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v12, 0 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1150-NEXT:    v_dual_mov_b32 v14, 0x70 :: v_dual_mov_b32 v15, 0
-; SDAG-GFX1150-NEXT:    s_clause 0x1
-; SDAG-GFX1150-NEXT:    global_load_b128 v[35:38], v[12:13], off
-; SDAG-GFX1150-NEXT:    global_load_b128 v[48:51], v[14:15], off
+; SDAG-GFX1150-NEXT:    global_load_b128 v[28:31], v[28:29], off
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(7)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v3
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v15
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v15, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(6)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v4
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v16
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v16, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v2
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v14
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v14, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v5
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v17
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v17, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v1
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v13
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v13, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v6
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v18
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v18, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v0
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v12
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v12, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v7
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v19
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v19, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(5)
 ; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v11
@@ -1585,40 +1583,40 @@ define <32 x i1> @vector_f32_ueq() {
 ; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v23
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v23, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(3)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v30
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v7
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v7, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(2)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v31
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v24
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v24, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v29
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v6
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v6, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v32
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v25
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v25, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v28
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v5
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v5, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v33
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v26
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v26, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v27
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v4
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v4, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v34
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v27
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v27, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(1)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v38
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v3
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v3, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_waitcnt vmcnt(0)
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v48
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v28
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v28, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v37
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v2
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v2, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v49
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v29
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v29, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v36
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v1
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v1, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v35
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v0
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v0, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v50
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v30
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v30, 0, 1, vcc_lo
-; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v51
+; SDAG-GFX1150-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v31
 ; SDAG-GFX1150-NEXT:    v_cndmask_b32_e64 v31, 0, 1, vcc_lo
 ; SDAG-GFX1150-NEXT:    s_setpc_b64 s[30:31]
 ;
@@ -1626,93 +1624,91 @@ define <32 x i1> @vector_f32_ueq() {
 ; GISEL-GFX1150:       ; %bb.0: ; %entry
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
 ; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v4, 16 :: v_dual_mov_b32 v5, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v8, 32 :: v_dual_mov_b32 v9, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[28:31], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[24:27], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 32 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[20:23], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 48 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[12:15], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 64 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[16:19], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 0x50 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[8:11], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 0x60 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1150-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, 0x70 :: v_dual_mov_b32 v1, 0
 ; GISEL-GFX1150-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v12, 48 :: v_dual_mov_b32 v13, 0
-; GISEL-GFX1150-NEXT:    s_clause 0x1
-; GISEL-GFX1150-NEXT:    global_load_b128 v[4:7], v[4:5], off
-; GISEL-GFX1150-NEXT:    global_load_b128 v[8:11], v[8:9], off
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v16, 64 :: v_dual_mov_b32 v17, 0
-; GISEL-GFX1150-NEXT:    global_load_b128 v[12:15], v[12:13], off
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v20, 0x50 :: v_dual_mov_b32 v21, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v24, 0x60 :: v_dual_mov_b32 v25, 0
-; GISEL-GFX1150-NEXT:    global_load_b128 v[16:19], v[16:17], off
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v28, 0x70 :: v_dual_mov_b32 v29, 0
-; GISEL-GFX1150-NEXT:    s_clause 0x2
-; GISEL-GFX1150-NEXT:    global_load_b128 v[20:23], v[20:21], off
-; GISEL-GFX1150-NEXT:    global_load_b128 v[24:27], v[24:25], off
-; GISEL-GFX1150-NEXT:    global_load_b128 v[28:31], v[28:29], off
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(7)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s0, v0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s1, v1
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s2, v2
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s3, v3
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(6)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s4, v4
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s0, v28
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s1, v29
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s2, v30
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s3, v31
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s0, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s5, v5
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s6, v6
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s7, v7
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(6)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s4, v24
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s5, v25
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s0, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s1, 0
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(5)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s8, v8
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s9, v9
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s10, v10
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s6, v26
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s7, v27
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s1, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s2, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s11, v11
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(5)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s8, v20
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s9, v21
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s10, v22
+; GISEL-GFX1150-NEXT:    s_cselect_b32 s2, 1, 0
+; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s3, 0
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s11, v23
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(4)
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s12, v12
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s13, v13
-; GISEL-GFX1150-NEXT:    s_cselect_b32 s2, 1, 0
-; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s3, 0
+; GISEL-GFX1150-NEXT:    s_cselect_b32 s3, 1, 0
+; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s4, 0
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s14, v14
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s15, v15
 ; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(3)
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s16, v16
-; GISEL-GFX1150-NEXT:    s_cselect_b32 s3, 1, 0
-; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s4, 0
+; GISEL-GFX1150-NEXT:    s_cselect_b32 s4, 1, 0
+; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s5, 0
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s17, v17
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s18, v18
 ; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s19, v19
-; GISEL-GFX1150-NEXT:    s_cselect_b32 s4, 1, 0
-; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s5, 0
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(2)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s20, v20
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s21, v21
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s22, v22
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s5, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s6, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s23, v23
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(1)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s24, v24
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s25, v25
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(2)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s20, v8
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s21, v9
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s22, v10
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s6, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s7, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s26, v26
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s27, v27
-; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0)
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s28, v28
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s23, v11
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(1)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s24, v4
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s25, v5
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s7, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s8, 0
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s29, v29
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s40, v30
-; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s41, v31
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s26, v6
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s27, v7
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v4, s4 :: v_dual_mov_b32 v5, s5
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s8, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s9, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, s0 :: v_dual_mov_b32 v1, s1
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v2, s2 :: v_dual_mov_b32 v3, s3
+; GISEL-GFX1150-NEXT:    s_waitcnt vmcnt(0)
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s28, v0
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s29, v1
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s40, v2
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s9, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s10, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v4, s4 :: v_dual_mov_b32 v5, s5
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v6, s6 :: v_dual_mov_b32 v7, s7
+; GISEL-GFX1150-NEXT:    v_readfirstlane_b32 s41, v3
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v0, s0 :: v_dual_mov_b32 v1, s1
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s10, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s11, 0
-; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v8, s8 :: v_dual_mov_b32 v9, s9
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v2, s2 :: v_dual_mov_b32 v3, s3
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v6, s6 :: v_dual_mov_b32 v7, s7
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s11, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s12, 0
+; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v8, s8 :: v_dual_mov_b32 v9, s9
 ; GISEL-GFX1150-NEXT:    v_dual_mov_b32 v10, s10 :: v_dual_mov_b32 v11, s11
 ; GISEL-GFX1150-NEXT:    s_cselect_b32 s12, 1, 0
 ; GISEL-GFX1150-NEXT:    s_cmp_nlg_f32 s13, 0
@@ -1774,49 +1770,49 @@ define <32 x i1> @vector_f32_ueq() {
 ; SDAG-GFX1200-NEXT:    s_wait_bvhcnt 0x0
 ; SDAG-GFX1200-NEXT:    s_wait_kmcnt 0x0
 ; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v0, 48 :: v_dual_mov_b32 v1, 0
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v4, 64 :: v_dual_mov_b32 v5, 0
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v8, 32 :: v_dual_mov_b32 v9, 0
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v2, 64 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v28, 0x70 :: v_dual_mov_b32 v29, 0
+; SDAG-GFX1200-NEXT:    s_clause 0x1
+; SDAG-GFX1200-NEXT:    global_load_b128 v[12:15], v[0:1], off
+; SDAG-GFX1200-NEXT:    global_load_b128 v[16:19], v[2:3], off
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v0, 32 :: v_dual_mov_b32 v1, 0
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v2, 0x50 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1200-NEXT:    s_clause 0x1
+; SDAG-GFX1200-NEXT:    global_load_b128 v[8:11], v[0:1], off
+; SDAG-GFX1200-NEXT:    global_load_b128 v[20:23], v[2:3], off
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v2, 0x60 :: v_dual_mov_b32 v3, 0
+; SDAG-GFX1200-NEXT:    s_clause 0x1
+; SDAG-GFX1200-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; SDAG-GFX1200-NEXT:    global_load_b128 v[24:27], v[2:3], off
+; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
 ; SDAG-GFX1200-NEXT:    s_clause 0x1
 ; SDAG-GFX1200-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; SDAG-GFX1200-NEXT:    global_load_b128 v[4:7], v[4:5], off
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v12, 0x50 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1200-NEXT:    s_clause 0x1
-; SDAG-GFX1200-NEXT:    global_load_b128 v[8:11], v[8:9], off
-; SDAG-GFX1200-NEXT:    global_load_b128 v[20:23], v[12:13], off
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v12, 16 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v14, 0x60 :: v_dual_mov_b32 v15, 0
-; SDAG-GFX1200-NEXT:    s_clause 0x1
-; SDAG-GFX1200-NEXT:    global_load_b128 v[27:30], v[12:13], off
-; SDAG-GFX1200-NEXT:    global_load_b128 v[31:34], v[14:15], off
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v12, 0 :: v_dual_mov_b32 v13, 0
-; SDAG-GFX1200-NEXT:    v_dual_mov_b32 v14, 0x70 :: v_dual_mov_b32 v15, 0
-; SDAG-GFX1200-NEXT:    s_clause 0x1
-; SDAG-GFX1200-NEXT:    global_load_b128 v[35:38], v[12:13], off
-; SDAG-GFX1200-NEXT:    global_load_b128 v[48:51], v[14:15], off
+; SDAG-GFX1200-NEXT:    global_load_b128 v[28:31], v[28:29], off
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x7
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v3
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v15
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v15, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x6
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v4
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v16
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v16, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v2
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v14
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v14, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v5
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v17
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v17, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v1
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v13
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v13, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v6
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v18
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v18, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v0
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v12
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v12, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v7
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v19
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v19, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x5
@@ -1846,55 +1842,55 @@ define <32 x i1> @vector_f32_ueq() {
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v23, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x3
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v30
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v7
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v7, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x2
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v31
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v24
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v24, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v29
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v6
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v6, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v32
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v25
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v25, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v28
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v5
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v5, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v33
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v26
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v26, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v27
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v4
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v4, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v34
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v27
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v27, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x1
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v38
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v3
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v3, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_wait_loadcnt 0x0
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v48
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v28
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v28, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v37
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v2
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v2, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v49
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v29
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v29, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v36
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v1
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v1, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v35
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v0
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v0, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v50
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v30
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v30, 0, 1, vcc_lo
-; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v51
+; SDAG-GFX1200-NEXT:    v_cmp_nlg_f32_e32 vcc_lo, 0, v31
 ; SDAG-GFX1200-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; SDAG-GFX1200-NEXT:    v_cndmask_b32_e64 v31, 0, 1, vcc_lo
 ; SDAG-GFX1200-NEXT:    s_setpc_b64 s[30:31]
@@ -1907,96 +1903,93 @@ define <32 x i1> @vector_f32_ueq() {
 ; GISEL-GFX1200-NEXT:    s_wait_bvhcnt 0x0
 ; GISEL-GFX1200-NEXT:    s_wait_kmcnt 0x0
 ; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 0 :: v_dual_mov_b32 v1, 0
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v4, 16 :: v_dual_mov_b32 v5, 0
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v8, 32 :: v_dual_mov_b32 v9, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[28:31], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 16 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[24:27], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 32 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[20:23], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 48 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[12:15], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 64 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[16:19], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 0x50 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[8:11], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 0x60 :: v_dual_mov_b32 v1, 0
+; GISEL-GFX1200-NEXT:    global_load_b128 v[4:7], v[0:1], off
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, 0x70 :: v_dual_mov_b32 v1, 0
 ; GISEL-GFX1200-NEXT:    global_load_b128 v[0:3], v[0:1], off
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v12, 48 :: v_dual_mov_b32 v13, 0
-; GISEL-GFX1200-NEXT:    s_clause 0x1
-; GISEL-GFX1200-NEXT:    global_load_b128 v[4:7], v[4:5], off
-; GISEL-GFX1200-NEXT:    global_load_b128 v[8:11], v[8:9], off
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v16, 64 :: v_dual_mov_b32 v17, 0
-; GISEL-GFX1200-NEXT:    global_load_b128 v[12:15], v[12:13], off
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v20, 0x50 :: v_dual_mov_b32 v21, 0
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v24, 0x60 :: v_dual_mov_b32 v25, 0
-; GISEL-GFX1200-NEXT:    global_load_b128 v[16:19], v[16:17], off
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v28, 0x70 :: v_dual_mov_b32 v29, 0
-; GISEL-GFX1200-NEXT:    s_clause 0x2
-; GISEL-GFX1200-NEXT:    global_load_b128 v[20:23], v[20:21], off
-; GISEL-GFX1200-NEXT:    global_load_b128 v[24:27], v[24:25], off
-; GISEL-GFX1200-NEXT:    global_load_b128 v[28:31], v[28:29], off
 ; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x7
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s0, v0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s1, v1
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s2, v2
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s3, v3
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x6
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s4, v4
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s0, v28
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s1, v29
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s2, v30
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s3, v31
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s0, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s5, v5
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s6, v6
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s7, v7
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x6
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s4, v24
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s5, v25
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s0, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s1, 0
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x5
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s8, v8
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s9, v9
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s10, v10
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s6, v26
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s7, v27
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s1, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s2, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s11, v11
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x5
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s8, v20
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s9, v21
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s10, v22
+; GISEL-GFX1200-NEXT:    s_cselect_b32 s2, 1, 0
+; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s3, 0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s11, v23
 ; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x4
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s12, v12
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s13, v13
-; GISEL-GFX1200-NEXT:    s_cselect_b32 s2, 1, 0
-; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s3, 0
+; GISEL-GFX1200-NEXT:    s_cselect_b32 s3, 1, 0
+; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s4, 0
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s14, v14
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s15, v15
 ; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x3
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s16, v16
-; GISEL-GFX1200-NEXT:    s_cselect_b32 s3, 1, 0
-; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s4, 0
+; GISEL-GFX1200-NEXT:    s_cselect_b32 s4, 1, 0
+; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s5, 0
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s17, v17
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s18, v18
 ; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s19, v19
-; GISEL-GFX1200-NEXT:    s_cselect_b32 s4, 1, 0
-; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s5, 0
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x2
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s20, v20
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s21, v21
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s22, v22
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s5, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s6, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s23, v23
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x1
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s24, v24
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s25, v25
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x2
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s20, v8
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s21, v9
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s22, v10
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s6, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s7, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s26, v26
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s27, v27
-; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s28, v28
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s23, v11
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x1
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s24, v4
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s25, v5
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s7, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s8, 0
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s29, v29
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s40, v30
-; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s41, v31
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s26, v6
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s27, v7
+; GISEL-GFX1200-NEXT:    s_wait_alu depctr_sa_sdst(0)
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v4, s4 :: v_dual_mov_b32 v5, s5
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s8, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s9, 0
-; GISEL-GFX1200-NEXT:    s_wait_alu depctr_sa_sdst(0)
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, s0 :: v_dual_mov_b32 v1, s1
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v2, s2 :: v_dual_mov_b32 v3, s3
+; GISEL-GFX1200-NEXT:    s_wait_loadcnt 0x0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s28, v0
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s29, v1
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s40, v2
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s9, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s10, 0
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v4, s4 :: v_dual_mov_b32 v5, s5
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v6, s6 :: v_dual_mov_b32 v7, s7
+; GISEL-GFX1200-NEXT:    v_readfirstlane_b32 s41, v3
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v0, s0 :: v_dual_mov_b32 v1, s1
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s10, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s11, 0
-; GISEL-GFX1200-NEXT:    s_wait_alu depctr_sa_sdst(0)
-; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v8, s8 :: v_dual_mov_b32 v9, s9
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v2, s2 :: v_dual_mov_b32 v3, s3
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v6, s6 :: v_dual_mov_b32 v7, s7
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s11, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s12, 0
 ; GISEL-GFX1200-NEXT:    s_wait_alu depctr_sa_sdst(0)
+; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v8, s8 :: v_dual_mov_b32 v9, s9
 ; GISEL-GFX1200-NEXT:    v_dual_mov_b32 v10, s10 :: v_dual_mov_b32 v11, s11
 ; GISEL-GFX1200-NEXT:    s_cselect_b32 s12, 1, 0
 ; GISEL-GFX1200-NEXT:    s_cmp_nlg_f32 s13, 0

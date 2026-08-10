@@ -56,29 +56,29 @@ define amdgpu_kernel void @undef_v6f32(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dword s0, s[8:9], 0x4
 ; GCN-NEXT:    ; implicit-def: $vgpr0
-; GCN-NEXT:    ; implicit-def: $vgpr4
+; GCN-NEXT:    ; implicit-def: $vgpr8
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s0, 0
 ; GCN-NEXT:    s_cselect_b64 s[0:1], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[0:1], s[0:1], -1
 ; GCN-NEXT:  .LBB4_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[6:9], v0
+; GCN-NEXT:    ds_read_b128 v[4:7], v0
 ; GCN-NEXT:    ds_read_b64 v[10:11], v0
 ; GCN-NEXT:    s_and_b64 s[2:3], s[0:1], exec
 ; GCN-NEXT:    s_cselect_b32 s2, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s2, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(1)
-; GCN-NEXT:    v_add_f32_e32 v3, v9, v3
+; GCN-NEXT:    v_add_f32_e32 v3, v7, v3
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_f32_e32 v5, v11, v5
-; GCN-NEXT:    v_add_f32_e32 v4, v10, v4
-; GCN-NEXT:    v_add_f32_e32 v2, v8, v2
-; GCN-NEXT:    v_add_f32_e32 v1, v7, v1
-; GCN-NEXT:    v_add_f32_e32 v0, v6, v0
+; GCN-NEXT:    v_add_f32_e32 v9, v11, v9
+; GCN-NEXT:    v_add_f32_e32 v8, v10, v8
+; GCN-NEXT:    v_add_f32_e32 v2, v6, v2
+; GCN-NEXT:    v_add_f32_e32 v1, v5, v1
+; GCN-NEXT:    v_add_f32_e32 v0, v4, v0
 ; GCN-NEXT:    s_cbranch_scc1 .LBB4_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    ds_write_b64 v0, v[4:5]
+; GCN-NEXT:    ds_write_b64 v0, v[8:9]
 ; GCN-NEXT:    ds_write_b128 v0, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
@@ -100,29 +100,29 @@ define amdgpu_kernel void @undef_v6i32(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dword s0, s[8:9], 0x4
 ; GCN-NEXT:    ; implicit-def: $vgpr0
-; GCN-NEXT:    ; implicit-def: $vgpr4
+; GCN-NEXT:    ; implicit-def: $vgpr8
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s0, 0
 ; GCN-NEXT:    s_cselect_b64 s[0:1], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[0:1], s[0:1], -1
 ; GCN-NEXT:  .LBB5_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[6:9], v0
+; GCN-NEXT:    ds_read_b128 v[4:7], v0
 ; GCN-NEXT:    ds_read_b64 v[10:11], v0
 ; GCN-NEXT:    s_and_b64 s[2:3], s[0:1], exec
 ; GCN-NEXT:    s_cselect_b32 s2, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s2, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(1)
-; GCN-NEXT:    v_add_u32_e32 v3, v9, v3
+; GCN-NEXT:    v_add_u32_e32 v3, v7, v3
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_u32_e32 v5, v11, v5
-; GCN-NEXT:    v_add_u32_e32 v4, v10, v4
-; GCN-NEXT:    v_add_u32_e32 v2, v8, v2
-; GCN-NEXT:    v_add_u32_e32 v1, v7, v1
-; GCN-NEXT:    v_add_u32_e32 v0, v6, v0
+; GCN-NEXT:    v_add_u32_e32 v9, v11, v9
+; GCN-NEXT:    v_add_u32_e32 v8, v10, v8
+; GCN-NEXT:    v_add_u32_e32 v2, v6, v2
+; GCN-NEXT:    v_add_u32_e32 v1, v5, v1
+; GCN-NEXT:    v_add_u32_e32 v0, v4, v0
 ; GCN-NEXT:    s_cbranch_scc1 .LBB5_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    ds_write_b64 v0, v[4:5]
+; GCN-NEXT:    ds_write_b64 v0, v[8:9]
 ; GCN-NEXT:    ds_write_b128 v0, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
@@ -145,28 +145,28 @@ define amdgpu_kernel void @undef_v5f32(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dword s0, s[8:9], 0x4
 ; GCN-NEXT:    ; implicit-def: $vgpr0
-; GCN-NEXT:    ; implicit-def: $vgpr4
+; GCN-NEXT:    ; implicit-def: $vgpr8
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s0, 0
 ; GCN-NEXT:    s_cselect_b64 s[0:1], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[0:1], s[0:1], -1
 ; GCN-NEXT:  .LBB6_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[5:8], v0
+; GCN-NEXT:    ds_read_b128 v[4:7], v0
 ; GCN-NEXT:    ds_read_b32 v9, v0
 ; GCN-NEXT:    s_and_b64 s[2:3], s[0:1], exec
 ; GCN-NEXT:    s_cselect_b32 s2, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s2, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(1)
-; GCN-NEXT:    v_add_f32_e32 v3, v8, v3
+; GCN-NEXT:    v_add_f32_e32 v3, v7, v3
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_f32_e32 v4, v9, v4
-; GCN-NEXT:    v_add_f32_e32 v2, v7, v2
-; GCN-NEXT:    v_add_f32_e32 v1, v6, v1
-; GCN-NEXT:    v_add_f32_e32 v0, v5, v0
+; GCN-NEXT:    v_add_f32_e32 v8, v9, v8
+; GCN-NEXT:    v_add_f32_e32 v2, v6, v2
+; GCN-NEXT:    v_add_f32_e32 v1, v5, v1
+; GCN-NEXT:    v_add_f32_e32 v0, v4, v0
 ; GCN-NEXT:    s_cbranch_scc1 .LBB6_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    ds_write_b32 v0, v4
+; GCN-NEXT:    ds_write_b32 v0, v8
 ; GCN-NEXT:    ds_write_b128 v0, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
@@ -188,28 +188,28 @@ define amdgpu_kernel void @undef_v5i32(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dword s0, s[8:9], 0x4
 ; GCN-NEXT:    ; implicit-def: $vgpr0
-; GCN-NEXT:    ; implicit-def: $vgpr4
+; GCN-NEXT:    ; implicit-def: $vgpr8
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s0, 0
 ; GCN-NEXT:    s_cselect_b64 s[0:1], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[0:1], s[0:1], -1
 ; GCN-NEXT:  .LBB7_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[5:8], v0
+; GCN-NEXT:    ds_read_b128 v[4:7], v0
 ; GCN-NEXT:    ds_read_b32 v9, v0
 ; GCN-NEXT:    s_and_b64 s[2:3], s[0:1], exec
 ; GCN-NEXT:    s_cselect_b32 s2, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s2, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(1)
-; GCN-NEXT:    v_add_u32_e32 v3, v8, v3
+; GCN-NEXT:    v_add_u32_e32 v3, v7, v3
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_u32_e32 v4, v9, v4
-; GCN-NEXT:    v_add_u32_e32 v2, v7, v2
-; GCN-NEXT:    v_add_u32_e32 v1, v6, v1
-; GCN-NEXT:    v_add_u32_e32 v0, v5, v0
+; GCN-NEXT:    v_add_u32_e32 v8, v9, v8
+; GCN-NEXT:    v_add_u32_e32 v2, v6, v2
+; GCN-NEXT:    v_add_u32_e32 v1, v5, v1
+; GCN-NEXT:    v_add_u32_e32 v0, v4, v0
 ; GCN-NEXT:    s_cbranch_scc1 .LBB7_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    ds_write_b32 v0, v4
+; GCN-NEXT:    ds_write_b32 v0, v8
 ; GCN-NEXT:    ds_write_b128 v0, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
@@ -232,29 +232,29 @@ define amdgpu_kernel void @undef_v3f64(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dwordx2 s[0:1], s[8:9], 0x0
 ; GCN-NEXT:    ; implicit-def: $vgpr0_vgpr1
-; GCN-NEXT:    ; implicit-def: $vgpr4_vgpr5
+; GCN-NEXT:    ; implicit-def: $vgpr8_vgpr9
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s1, 0
 ; GCN-NEXT:    s_cselect_b64 s[2:3], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[2:3], s[2:3], -1
-; GCN-NEXT:    v_mov_b32_e32 v6, s0
+; GCN-NEXT:    v_mov_b32_e32 v10, s0
 ; GCN-NEXT:  .LBB8_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[7:10], v6
-; GCN-NEXT:    ds_read_b64 v[11:12], v6 offset:16
+; GCN-NEXT:    ds_read_b128 v[4:7], v10
+; GCN-NEXT:    ds_read_b64 v[11:12], v10 offset:16
 ; GCN-NEXT:    s_and_b64 s[4:5], s[2:3], exec
 ; GCN-NEXT:    s_cselect_b32 s1, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s1, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(1)
-; GCN-NEXT:    v_add_f64 v[2:3], v[9:10], v[2:3]
+; GCN-NEXT:    v_add_f64 v[2:3], v[6:7], v[2:3]
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_f64 v[4:5], v[11:12], v[4:5]
-; GCN-NEXT:    v_add_f64 v[0:1], v[7:8], v[0:1]
+; GCN-NEXT:    v_add_f64 v[8:9], v[11:12], v[8:9]
+; GCN-NEXT:    v_add_f64 v[0:1], v[4:5], v[0:1]
 ; GCN-NEXT:    s_cbranch_scc1 .LBB8_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    v_mov_b32_e32 v6, s0
-; GCN-NEXT:    ds_write_b64 v6, v[4:5] offset:16
-; GCN-NEXT:    ds_write_b128 v6, v[0:3]
+; GCN-NEXT:    v_mov_b32_e32 v4, s0
+; GCN-NEXT:    ds_write_b64 v4, v[8:9] offset:16
+; GCN-NEXT:    ds_write_b128 v4, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
   br label %loop
@@ -275,31 +275,31 @@ define amdgpu_kernel void @undef_v3i64(ptr addrspace(3) %ptr, i1 %cond) {
 ; GCN:       ; %bb.0: ; %entry
 ; GCN-NEXT:    s_load_dwordx2 s[0:1], s[8:9], 0x0
 ; GCN-NEXT:    ; implicit-def: $vgpr0_vgpr1
-; GCN-NEXT:    ; implicit-def: $vgpr4_vgpr5
+; GCN-NEXT:    ; implicit-def: $vgpr8_vgpr9
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
 ; GCN-NEXT:    s_bitcmp1_b32 s1, 0
 ; GCN-NEXT:    s_cselect_b64 s[2:3], -1, 0
 ; GCN-NEXT:    s_xor_b64 s[2:3], s[2:3], -1
-; GCN-NEXT:    v_mov_b32_e32 v6, s0
+; GCN-NEXT:    v_mov_b32_e32 v10, s0
 ; GCN-NEXT:  .LBB9_1: ; %loop
 ; GCN-NEXT:    ; =>This Inner Loop Header: Depth=1
-; GCN-NEXT:    ds_read_b128 v[7:10], v6
-; GCN-NEXT:    ds_read_b64 v[11:12], v6 offset:16
+; GCN-NEXT:    ds_read_b128 v[4:7], v10
+; GCN-NEXT:    ds_read_b64 v[11:12], v10 offset:16
 ; GCN-NEXT:    s_and_b64 s[4:5], s[2:3], exec
 ; GCN-NEXT:    s_cselect_b32 s1, 1, 0
 ; GCN-NEXT:    s_cmp_lg_u32 s1, 1
 ; GCN-NEXT:    s_waitcnt lgkmcnt(0)
-; GCN-NEXT:    v_add_co_u32_e32 v4, vcc, v11, v4
-; GCN-NEXT:    v_addc_co_u32_e32 v5, vcc, v12, v5, vcc
-; GCN-NEXT:    v_add_co_u32_e32 v2, vcc, v9, v2
-; GCN-NEXT:    v_addc_co_u32_e32 v3, vcc, v10, v3, vcc
-; GCN-NEXT:    v_add_co_u32_e32 v0, vcc, v7, v0
-; GCN-NEXT:    v_addc_co_u32_e32 v1, vcc, v8, v1, vcc
+; GCN-NEXT:    v_add_co_u32_e32 v8, vcc, v11, v8
+; GCN-NEXT:    v_addc_co_u32_e32 v9, vcc, v12, v9, vcc
+; GCN-NEXT:    v_add_co_u32_e32 v2, vcc, v6, v2
+; GCN-NEXT:    v_addc_co_u32_e32 v3, vcc, v7, v3, vcc
+; GCN-NEXT:    v_add_co_u32_e32 v0, vcc, v4, v0
+; GCN-NEXT:    v_addc_co_u32_e32 v1, vcc, v5, v1, vcc
 ; GCN-NEXT:    s_cbranch_scc1 .LBB9_1
 ; GCN-NEXT:  ; %bb.2: ; %ret
-; GCN-NEXT:    v_mov_b32_e32 v6, s0
-; GCN-NEXT:    ds_write_b64 v6, v[4:5] offset:16
-; GCN-NEXT:    ds_write_b128 v6, v[0:3]
+; GCN-NEXT:    v_mov_b32_e32 v4, s0
+; GCN-NEXT:    ds_write_b64 v4, v[8:9] offset:16
+; GCN-NEXT:    ds_write_b128 v4, v[0:3]
 ; GCN-NEXT:    s_endpgm
 entry:
   br label %loop

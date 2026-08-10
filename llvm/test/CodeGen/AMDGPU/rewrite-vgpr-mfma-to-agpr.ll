@@ -380,69 +380,67 @@ define amdgpu_kernel void @illegal_mfma_after_rewrite() #1 {
 ; CHECK-NEXT:    ;;#ASMSTART
 ; CHECK-NEXT:    ; def s[0:3]
 ; CHECK-NEXT:    ;;#ASMEND
-; CHECK-NEXT:    ;;#ASMSTART
-; CHECK-NEXT:    ; def v[16:19]
-; CHECK-NEXT:    ;;#ASMEND
-; CHECK-NEXT:    s_nop 0
-; CHECK-NEXT:    v_mov_b64_e32 v[0:1], s[0:1]
-; CHECK-NEXT:    v_mov_b64_e32 v[2:3], s[2:3]
+; CHECK-NEXT:    v_mov_b64_e32 v[18:19], 0
+; CHECK-NEXT:    v_mov_b64_e32 v[6:7], s[2:3]
+; CHECK-NEXT:    v_mov_b64_e32 v[4:5], s[0:1]
 ; CHECK-NEXT:    s_mov_b32 s0, 0x3c003c00
 ; CHECK-NEXT:    s_mov_b32 s1, s0
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[4:7], v[22:23], v[22:23], v[0:3]
 ; CHECK-NEXT:    v_mov_b64_e32 v[24:25], s[0:1]
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[0:3], v[22:23], v[22:23], v[4:7]
 ; CHECK-NEXT:    s_mov_b32 s0, 0x7e007e00
 ; CHECK-NEXT:    s_mov_b32 s1, s0
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[4:7], v[22:23], v[22:23], v[4:7]
 ; CHECK-NEXT:    v_mov_b64_e32 v[26:27], s[0:1]
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[6:9], v[22:23], v[24:25], v[0:3]
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[6:9], v[22:23], v[22:23], v[6:9]
-; CHECK-NEXT:    s_nop 3
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v20, v4
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[12:15], v[22:23], v[26:27], v[0:3]
-; CHECK-NEXT:    s_nop 0
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[8:11], v[22:23], v[24:25], v[4:7]
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[12:15], v[22:23], v[22:23], v[8:11]
+; CHECK-NEXT:    ;;#ASMSTART
+; CHECK-NEXT:    ; def v[14:17]
+; CHECK-NEXT:    ;;#ASMEND
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[0:3], v[22:23], v[22:23], v[0:3]
+; CHECK-NEXT:    s_nop 4
 ; CHECK-NEXT:    v_mov_b32_e32 v8, 0x7fc00000
 ; CHECK-NEXT:    v_mov_b32_e32 v9, v8
 ; CHECK-NEXT:    v_mov_b32_e32 v10, v8
 ; CHECK-NEXT:    v_mov_b32_e32 v11, v8
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v6, v6
-; CHECK-NEXT:    v_mov_b64_e32 v[0:1], 0
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[4:7], v[22:23], v[26:27], v[4:7]
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v12, v12
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v20, v0
+; CHECK-NEXT:    global_store_short v[18:19], v12, off
 ; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[8:11], v[22:23], v[22:23], v[8:11]
-; CHECK-NEXT:    global_store_short v[0:1], v6, off
 ; CHECK-NEXT:    buffer_wbl2 sc0 sc1
 ; CHECK-NEXT:    s_waitcnt vmcnt(0)
 ; CHECK-NEXT:    buffer_inv sc0 sc1
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[6:9], v[22:23], v[22:23], v[8:11]
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[2:5], v[22:23], v[22:23], v[16:19]
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[16:19], v[22:23], v[24:25], v[16:19]
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[8:11], v[22:23], v[22:23], v[8:11]
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[0:3], v[22:23], v[22:23], v[14:17]
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[12:15], v[22:23], v[24:25], v[14:17]
 ; CHECK-NEXT:    s_nop 4
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v10, v6
-; CHECK-NEXT:    global_store_short v[0:1], v10, off
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v8, v8
+; CHECK-NEXT:    global_store_short v[18:19], v8, off
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[4:7], v[22:23], v[22:23], v[4:7]
+; CHECK-NEXT:    buffer_wbl2 sc0 sc1
+; CHECK-NEXT:    s_waitcnt vmcnt(0)
+; CHECK-NEXT:    buffer_inv sc0 sc1
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[0:3], v[22:23], v[22:23], v[0:3]
 ; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[6:9], v[22:23], v[22:23], v[12:15]
-; CHECK-NEXT:    buffer_wbl2 sc0 sc1
-; CHECK-NEXT:    s_waitcnt vmcnt(0)
-; CHECK-NEXT:    buffer_inv sc0 sc1
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[2:5], v[22:23], v[22:23], v[2:5]
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[8:11], v[22:23], v[22:23], v[16:19]
 ; CHECK-NEXT:    s_nop 1
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v6, v6
-; CHECK-NEXT:    global_store_short v[0:1], v6, off
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[6:9], v[24:25], v[22:23], v[8:11]
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v4, v4
+; CHECK-NEXT:    global_store_short v[18:19], v4, off
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[4:7], v[24:25], v[22:23], v[6:9]
 ; CHECK-NEXT:    buffer_wbl2 sc0 sc1
 ; CHECK-NEXT:    s_waitcnt vmcnt(0)
 ; CHECK-NEXT:    buffer_inv sc0 sc1
-; CHECK-NEXT:    global_store_short v[0:1], v20, off
+; CHECK-NEXT:    global_store_short v[18:19], v20, off
 ; CHECK-NEXT:    buffer_wbl2 sc0 sc1
 ; CHECK-NEXT:    s_waitcnt vmcnt(0)
 ; CHECK-NEXT:    buffer_inv sc0 sc1
-; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[2:5], v[26:27], v[22:23], v[2:5]
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v6, v6
-; CHECK-NEXT:    global_store_short v[0:1], v6, off
+; CHECK-NEXT:    v_mfma_f32_16x16x16_f16 v[0:3], v[26:27], v[22:23], v[0:3]
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v4, v4
+; CHECK-NEXT:    global_store_short v[18:19], v4, off
 ; CHECK-NEXT:    s_nop 4
-; CHECK-NEXT:    v_cvt_f16_f32_e32 v2, v2
+; CHECK-NEXT:    v_cvt_f16_f32_e32 v0, v0
 ; CHECK-NEXT:    buffer_wbl2 sc0 sc1
 ; CHECK-NEXT:    s_waitcnt vmcnt(0)
 ; CHECK-NEXT:    buffer_inv sc0 sc1
-; CHECK-NEXT:    global_store_short v[0:1], v2, off
+; CHECK-NEXT:    global_store_short v[18:19], v0, off
 ; CHECK-NEXT:    s_endpgm
 entry:
   %k0 = call <4 x float> asm sideeffect "; def $0", "=s"()

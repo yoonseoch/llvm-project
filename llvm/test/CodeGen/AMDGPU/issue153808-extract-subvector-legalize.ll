@@ -61,18 +61,19 @@ define <3 x float> @extract_subvector_v3f32_v33f32_elt30_1(ptr addrspace(1) %ptr
 ; GFX900-LABEL: extract_subvector_v3f32_v33f32_elt30_1:
 ; GFX900:       ; %bb.0:
 ; GFX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX900-NEXT:    global_load_dwordx4 v[3:6], v[0:1], off
-; GFX900-NEXT:    global_load_dwordx4 v[7:10], v[0:1], off offset:112
+; GFX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
+; GFX900-NEXT:    global_load_dwordx4 v[2:5], v[0:1], off offset:112
 ; GFX900-NEXT:    global_load_dword v2, v[0:1], off offset:128
 ; GFX900-NEXT:    s_mov_b32 s4, 0
+; GFX900-NEXT:    ; kill: killed $vgpr0 killed $vgpr1
 ; GFX900-NEXT:    s_mov_b32 s5, s4
 ; GFX900-NEXT:    s_mov_b32 s6, s4
 ; GFX900-NEXT:    s_mov_b32 s7, s4
 ; GFX900-NEXT:    s_waitcnt vmcnt(2)
-; GFX900-NEXT:    buffer_store_dwordx4 v[3:6], off, s[4:7], 0
+; GFX900-NEXT:    buffer_store_dwordx4 v[6:9], off, s[4:7], 0
 ; GFX900-NEXT:    s_waitcnt vmcnt(2)
-; GFX900-NEXT:    v_mov_b32_e32 v0, v9
-; GFX900-NEXT:    v_mov_b32_e32 v1, v10
+; GFX900-NEXT:    v_mov_b32_e32 v0, v4
+; GFX900-NEXT:    v_mov_b32_e32 v1, v5
 ; GFX900-NEXT:    s_waitcnt vmcnt(0)
 ; GFX900-NEXT:    s_setpc_b64 s[30:31]
 ;
@@ -104,18 +105,19 @@ define <6 x float> @extract_subvector_v6f32_v36f32_elt30(ptr addrspace(1) %ptr) 
 ; GFX900-LABEL: extract_subvector_v6f32_v36f32_elt30:
 ; GFX900:       ; %bb.0:
 ; GFX900-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; GFX900-NEXT:    global_load_dwordx4 v[6:9], v[0:1], off
-; GFX900-NEXT:    global_load_dwordx4 v[10:13], v[0:1], off offset:112
+; GFX900-NEXT:    global_load_dwordx4 v[8:11], v[0:1], off
+; GFX900-NEXT:    global_load_dwordx4 v[4:7], v[0:1], off offset:112
 ; GFX900-NEXT:    global_load_dwordx4 v[2:5], v[0:1], off offset:128
 ; GFX900-NEXT:    s_mov_b32 s4, 0
+; GFX900-NEXT:    ; kill: killed $vgpr0 killed $vgpr1
 ; GFX900-NEXT:    s_mov_b32 s5, s4
 ; GFX900-NEXT:    s_mov_b32 s6, s4
 ; GFX900-NEXT:    s_mov_b32 s7, s4
 ; GFX900-NEXT:    s_waitcnt vmcnt(2)
-; GFX900-NEXT:    buffer_store_dwordx4 v[6:9], off, s[4:7], 0
+; GFX900-NEXT:    buffer_store_dwordx4 v[8:11], off, s[4:7], 0
 ; GFX900-NEXT:    s_waitcnt vmcnt(2)
-; GFX900-NEXT:    v_mov_b32_e32 v0, v12
-; GFX900-NEXT:    v_mov_b32_e32 v1, v13
+; GFX900-NEXT:    v_mov_b32_e32 v0, v6
+; GFX900-NEXT:    v_mov_b32_e32 v1, v7
 ; GFX900-NEXT:    s_waitcnt vmcnt(0)
 ; GFX900-NEXT:    s_setpc_b64 s[30:31]
 ;

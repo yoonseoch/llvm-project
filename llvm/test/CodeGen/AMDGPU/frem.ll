@@ -16426,25 +16426,25 @@ define amdgpu_kernel void @frem_v2f64(ptr addrspace(1) %out, ptr addrspace(1) %i
 ; SI-NEXT:    s_mov_b32 s3, 0xf000
 ; SI-NEXT:    s_mov_b32 s2, -1
 ; SI-NEXT:    s_mov_b32 s6, s2
+; SI-NEXT:    s_mov_b32 s7, s3
 ; SI-NEXT:    s_waitcnt lgkmcnt(0)
 ; SI-NEXT:    s_mov_b32 s0, s10
 ; SI-NEXT:    s_mov_b32 s1, s11
-; SI-NEXT:    buffer_load_dwordx4 v[0:3], off, s[0:3], 0
-; SI-NEXT:    s_mov_b32 s7, s3
+; SI-NEXT:    buffer_load_dwordx4 v[0:3], off, s[4:7], 0 offset:64
+; SI-NEXT:    buffer_load_dwordx4 v[4:7], off, s[0:3], 0
+; SI-NEXT:    s_waitcnt vmcnt(1)
+; SI-NEXT:    v_readfirstlane_b32 s11, v1
+; SI-NEXT:    v_readfirstlane_b32 s10, v0
 ; SI-NEXT:    s_waitcnt vmcnt(0)
-; SI-NEXT:    v_readfirstlane_b32 s2, v2
-; SI-NEXT:    v_readfirstlane_b32 s3, v3
-; SI-NEXT:    buffer_load_dwordx4 v[2:5], off, s[4:7], 0 offset:64
-; SI-NEXT:    v_readfirstlane_b32 s7, v1
-; SI-NEXT:    v_readfirstlane_b32 s6, v0
-; SI-NEXT:    s_waitcnt vmcnt(0)
-; SI-NEXT:    v_readfirstlane_b32 s11, v3
-; SI-NEXT:    v_readfirstlane_b32 s10, v2
+; SI-NEXT:    v_readfirstlane_b32 s7, v5
+; SI-NEXT:    v_readfirstlane_b32 s6, v4
 ; SI-NEXT:    v_mov_b32_e32 v0, s10
 ; SI-NEXT:    v_mov_b32_e32 v1, s11
 ; SI-NEXT:    v_cmp_ngt_f64_e64 s[0:1], |s[6:7]|, |v[0:1]|
-; SI-NEXT:    v_readfirstlane_b32 s4, v4
-; SI-NEXT:    v_readfirstlane_b32 s5, v5
+; SI-NEXT:    v_readfirstlane_b32 s2, v6
+; SI-NEXT:    v_readfirstlane_b32 s3, v7
+; SI-NEXT:    v_readfirstlane_b32 s4, v2
+; SI-NEXT:    v_readfirstlane_b32 s5, v3
 ; SI-NEXT:    s_and_b64 vcc, exec, s[0:1]
 ; SI-NEXT:    s_cbranch_vccz .LBB13_2
 ; SI-NEXT:  ; %bb.1: ; %frem.else16

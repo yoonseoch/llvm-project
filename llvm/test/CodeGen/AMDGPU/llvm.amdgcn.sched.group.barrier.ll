@@ -40,9 +40,9 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_READ_VALU_WRITE(ptr
 ; SDAG-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:32
 ; SDAG-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:48
 ; SDAG-NEXT:    global_load_dwordx4 v[16:19], v32, s[0:1] offset:64
-; SDAG-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:80
+; SDAG-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:80
 ; SDAG-NEXT:    global_load_dwordx4 v[24:27], v32, s[0:1] offset:96
-; SDAG-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:112
+; SDAG-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:112
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(8) SyncID(0)
 ; SDAG-NEXT:    s_waitcnt vmcnt(7)
 ; SDAG-NEXT:    v_mul_lo_u32 v3, v3, v3
@@ -70,23 +70,23 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_READ_VALU_WRITE(ptr
 ; SDAG-NEXT:    v_mul_lo_u32 v17, v17, v17
 ; SDAG-NEXT:    v_mul_lo_u32 v16, v16, v16
 ; SDAG-NEXT:    s_waitcnt vmcnt(2)
-; SDAG-NEXT:    v_mul_lo_u32 v23, v23, v23
-; SDAG-NEXT:    v_mul_lo_u32 v22, v22, v22
-; SDAG-NEXT:    v_mul_lo_u32 v21, v21, v21
-; SDAG-NEXT:    v_mul_lo_u32 v20, v20, v20
+; SDAG-NEXT:    v_mul_lo_u32 v31, v31, v31
+; SDAG-NEXT:    v_mul_lo_u32 v30, v30, v30
+; SDAG-NEXT:    v_mul_lo_u32 v29, v29, v29
+; SDAG-NEXT:    v_mul_lo_u32 v28, v28, v28
 ; SDAG-NEXT:    s_waitcnt vmcnt(1)
 ; SDAG-NEXT:    v_mul_lo_u32 v27, v27, v27
 ; SDAG-NEXT:    v_mul_lo_u32 v26, v26, v26
 ; SDAG-NEXT:    v_mul_lo_u32 v25, v25, v25
 ; SDAG-NEXT:    v_mul_lo_u32 v24, v24, v24
 ; SDAG-NEXT:    s_waitcnt vmcnt(0)
-; SDAG-NEXT:    v_mul_lo_u32 v31, v31, v31
-; SDAG-NEXT:    v_mul_lo_u32 v30, v30, v30
-; SDAG-NEXT:    v_mul_lo_u32 v29, v29, v29
-; SDAG-NEXT:    v_mul_lo_u32 v28, v28, v28
-; SDAG-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:112
+; SDAG-NEXT:    v_mul_lo_u32 v23, v23, v23
+; SDAG-NEXT:    v_mul_lo_u32 v22, v22, v22
+; SDAG-NEXT:    v_mul_lo_u32 v21, v21, v21
+; SDAG-NEXT:    v_mul_lo_u32 v20, v20, v20
+; SDAG-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:112
 ; SDAG-NEXT:    global_store_dwordx4 v32, v[24:27], s[2:3] offset:96
-; SDAG-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:80
+; SDAG-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:80
 ; SDAG-NEXT:    global_store_dwordx4 v32, v[16:19], s[2:3] offset:64
 ; SDAG-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:48
 ; SDAG-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:32
@@ -176,9 +176,9 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_READ_VALU_WRITE(ptr
 ; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:32
 ; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:48
 ; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[16:19], v32, s[0:1] offset:64
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:80
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:80
 ; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[24:27], v32, s[0:1] offset:96
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:112
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:112
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(8) SyncID(0)
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(7)
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v3, v3, v3
@@ -206,23 +206,23 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_READ_VALU_WRITE(ptr
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v17, v17, v17
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v16, v16, v16
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(2)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v23, v23, v23
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v22, v22, v22
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v21, v21, v21
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v20, v20, v20
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v31, v31, v31
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v30, v30, v30
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v29, v29, v29
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v28, v28, v28
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v27, v27, v27
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v26, v26, v26
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v25, v25, v25
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v24, v24, v24
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v31, v31, v31
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v30, v30, v30
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v29, v29, v29
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v28, v28, v28
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:112
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v23, v23, v23
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v22, v22, v22
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v21, v21, v21
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v20, v20, v20
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:112
 ; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[24:27], s[2:3] offset:96
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:80
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:80
 ; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[16:19], s[2:3] offset:64
 ; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:48
 ; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:32
@@ -251,79 +251,77 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; SDAG:       ; %bb.0:
 ; SDAG-NEXT:    s_load_dwordx4 s[0:3], s[4:5], 0x24
 ; SDAG-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
-; SDAG-NEXT:    v_lshlrev_b32_e32 v32, 7, v0
+; SDAG-NEXT:    v_lshlrev_b32_e32 v38, 7, v0
 ; SDAG-NEXT:    s_waitcnt lgkmcnt(0)
-; SDAG-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:48
-; SDAG-NEXT:    global_load_dwordx4 v[0:3], v32, s[0:1]
+; SDAG-NEXT:    global_load_dwordx4 v[18:21], v38, s[0:1] offset:48
+; SDAG-NEXT:    global_load_dwordx4 v[0:3], v38, s[0:1]
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; SDAG-NEXT:    s_waitcnt vmcnt(1)
-; SDAG-NEXT:    v_mul_lo_u32 v31, v31, v31
 ; SDAG-NEXT:    s_waitcnt vmcnt(0)
 ; SDAG-NEXT:    v_mul_lo_u32 v3, v3, v3
 ; SDAG-NEXT:    v_mul_lo_u32 v2, v2, v2
-; SDAG-NEXT:    global_load_dwordx4 v[4:7], v32, s[0:1] offset:112
+; SDAG-NEXT:    global_load_dwordx4 v[22:25], v38, s[0:1] offset:112
 ; SDAG-NEXT:    v_mul_lo_u32 v1, v1, v1
 ; SDAG-NEXT:    v_mul_lo_u32 v0, v0, v0
-; SDAG-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:96
-; SDAG-NEXT:    v_mul_lo_u32 v30, v30, v30
-; SDAG-NEXT:    v_mul_lo_u32 v29, v29, v29
-; SDAG-NEXT:    v_mul_lo_u32 v28, v28, v28
+; SDAG-NEXT:    global_load_dwordx4 v[10:13], v38, s[0:1] offset:96
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; SDAG-NEXT:    s_waitcnt vmcnt(1)
-; SDAG-NEXT:    v_mul_lo_u32 v7, v7, v7
-; SDAG-NEXT:    v_mul_lo_u32 v6, v6, v6
-; SDAG-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:80
+; SDAG-NEXT:    v_mul_lo_u32 v37, v25, v25
+; SDAG-NEXT:    v_mul_lo_u32 v36, v24, v24
+; SDAG-NEXT:    global_load_dwordx4 v[30:33], v38, s[0:1] offset:80
+; SDAG-NEXT:    v_mul_lo_u32 v35, v23, v23
+; SDAG-NEXT:    v_mul_lo_u32 v34, v22, v22
+; SDAG-NEXT:    global_load_dwordx4 v[4:7], v38, s[0:1] offset:16
+; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
+; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
+; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
+; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
+; SDAG-NEXT:    s_waitcnt vmcnt(1)
+; SDAG-NEXT:    v_mul_lo_u32 v23, v31, v31
+; SDAG-NEXT:    v_mul_lo_u32 v22, v30, v30
+; SDAG-NEXT:    v_mul_lo_u32 v31, v11, v11
+; SDAG-NEXT:    s_waitcnt vmcnt(0)
 ; SDAG-NEXT:    v_mul_lo_u32 v5, v5, v5
 ; SDAG-NEXT:    v_mul_lo_u32 v4, v4, v4
-; SDAG-NEXT:    global_load_dwordx4 v[16:19], v32, s[0:1] offset:16
-; SDAG-NEXT:    s_waitcnt vmcnt(2)
-; SDAG-NEXT:    v_mul_lo_u32 v11, v11, v11
-; SDAG-NEXT:    v_mul_lo_u32 v10, v10, v10
-; SDAG-NEXT:    v_mul_lo_u32 v9, v9, v9
-; SDAG-NEXT:    v_mul_lo_u32 v8, v8, v8
+; SDAG-NEXT:    global_load_dwordx4 v[26:29], v38, s[0:1] offset:64
+; SDAG-NEXT:    v_mul_lo_u32 v25, v33, v33
+; SDAG-NEXT:    v_mul_lo_u32 v24, v32, v32
+; SDAG-NEXT:    global_load_dwordx4 v[14:17], v38, s[0:1] offset:32
+; SDAG-NEXT:    v_mul_lo_u32 v33, v13, v13
+; SDAG-NEXT:    v_mul_lo_u32 v32, v12, v12
+; SDAG-NEXT:    v_mul_lo_u32 v30, v10, v10
+; SDAG-NEXT:    v_mul_lo_u32 v7, v7, v7
+; SDAG-NEXT:    v_mul_lo_u32 v6, v6, v6
+; SDAG-NEXT:    v_mul_lo_u32 v13, v19, v19
+; SDAG-NEXT:    v_mul_lo_u32 v12, v18, v18
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; SDAG-NEXT:    s_waitcnt vmcnt(1)
-; SDAG-NEXT:    v_mul_lo_u32 v13, v13, v13
-; SDAG-NEXT:    v_mul_lo_u32 v12, v12, v12
-; SDAG-NEXT:    s_waitcnt vmcnt(0)
-; SDAG-NEXT:    v_mul_lo_u32 v17, v17, v17
-; SDAG-NEXT:    v_mul_lo_u32 v16, v16, v16
-; SDAG-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:64
-; SDAG-NEXT:    v_mul_lo_u32 v15, v15, v15
-; SDAG-NEXT:    v_mul_lo_u32 v14, v14, v14
-; SDAG-NEXT:    global_load_dwordx4 v[24:27], v32, s[0:1] offset:32
-; SDAG-NEXT:    v_mul_lo_u32 v19, v19, v19
-; SDAG-NEXT:    v_mul_lo_u32 v18, v18, v18
-; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
-; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
-; SDAG-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; SDAG-NEXT:    s_waitcnt vmcnt(1)
-; SDAG-NEXT:    v_mul_lo_u32 v23, v23, v23
-; SDAG-NEXT:    v_mul_lo_u32 v22, v22, v22
-; SDAG-NEXT:    v_mul_lo_u32 v21, v21, v21
-; SDAG-NEXT:    s_waitcnt vmcnt(0)
-; SDAG-NEXT:    v_mul_lo_u32 v25, v25, v25
-; SDAG-NEXT:    v_mul_lo_u32 v24, v24, v24
-; SDAG-NEXT:    v_mul_lo_u32 v20, v20, v20
+; SDAG-NEXT:    v_mul_lo_u32 v29, v29, v29
+; SDAG-NEXT:    v_mul_lo_u32 v28, v28, v28
 ; SDAG-NEXT:    v_mul_lo_u32 v27, v27, v27
+; SDAG-NEXT:    s_waitcnt vmcnt(0)
+; SDAG-NEXT:    v_mul_lo_u32 v9, v15, v15
+; SDAG-NEXT:    v_mul_lo_u32 v8, v14, v14
 ; SDAG-NEXT:    v_mul_lo_u32 v26, v26, v26
-; SDAG-NEXT:    global_store_dwordx4 v32, v[4:7], s[2:3] offset:112
-; SDAG-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:96
-; SDAG-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:80
-; SDAG-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:64
-; SDAG-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:48
-; SDAG-NEXT:    global_store_dwordx4 v32, v[24:27], s[2:3] offset:32
-; SDAG-NEXT:    global_store_dwordx4 v32, v[16:19], s[2:3] offset:16
-; SDAG-NEXT:    global_store_dwordx4 v32, v[0:3], s[2:3]
+; SDAG-NEXT:    v_mul_lo_u32 v15, v21, v21
+; SDAG-NEXT:    v_mul_lo_u32 v14, v20, v20
+; SDAG-NEXT:    v_mul_lo_u32 v11, v17, v17
+; SDAG-NEXT:    v_mul_lo_u32 v10, v16, v16
+; SDAG-NEXT:    global_store_dwordx4 v38, v[34:37], s[2:3] offset:112
+; SDAG-NEXT:    global_store_dwordx4 v38, v[30:33], s[2:3] offset:96
+; SDAG-NEXT:    global_store_dwordx4 v38, v[22:25], s[2:3] offset:80
+; SDAG-NEXT:    global_store_dwordx4 v38, v[26:29], s[2:3] offset:64
+; SDAG-NEXT:    global_store_dwordx4 v38, v[12:15], s[2:3] offset:48
+; SDAG-NEXT:    global_store_dwordx4 v38, v[8:11], s[2:3] offset:32
+; SDAG-NEXT:    global_store_dwordx4 v38, v[4:7], s[2:3] offset:16
+; SDAG-NEXT:    global_store_dwordx4 v38, v[0:3], s[2:3]
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; SDAG-NEXT:    ; sched_group_barrier mask(0x00000040) size(8) SyncID(0)
 ; SDAG-NEXT:    s_endpgm
@@ -335,52 +333,52 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; GISEL-NEXT:    v_lshlrev_b32_e32 v32, 7, v0
 ; GISEL-NEXT:    s_waitcnt lgkmcnt(0)
 ; GISEL-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:96
-; GISEL-NEXT:    global_load_dwordx4 v[0:3], v32, s[0:1] offset:112
+; GISEL-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:112
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(1)
 ; GISEL-NEXT:    v_mul_lo_u32 v28, v28, v28
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
-; GISEL-NEXT:    v_mul_lo_u32 v0, v0, v0
-; GISEL-NEXT:    v_mul_lo_u32 v1, v1, v1
-; GISEL-NEXT:    global_load_dwordx4 v[4:7], v32, s[0:1]
-; GISEL-NEXT:    v_mul_lo_u32 v2, v2, v2
-; GISEL-NEXT:    v_mul_lo_u32 v3, v3, v3
+; GISEL-NEXT:    v_mul_lo_u32 v12, v12, v12
+; GISEL-NEXT:    v_mul_lo_u32 v13, v13, v13
+; GISEL-NEXT:    global_load_dwordx4 v[0:3], v32, s[0:1]
+; GISEL-NEXT:    v_mul_lo_u32 v14, v14, v14
+; GISEL-NEXT:    v_mul_lo_u32 v15, v15, v15
 ; GISEL-NEXT:    v_mul_lo_u32 v29, v29, v29
 ; GISEL-NEXT:    v_mul_lo_u32 v30, v30, v30
 ; GISEL-NEXT:    v_mul_lo_u32 v31, v31, v31
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
-; GISEL-NEXT:    v_mul_lo_u32 v4, v4, v4
-; GISEL-NEXT:    v_mul_lo_u32 v5, v5, v5
-; GISEL-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:16
-; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
-; GISEL-NEXT:    v_mul_lo_u32 v7, v7, v7
-; GISEL-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:32
+; GISEL-NEXT:    v_mul_lo_u32 v0, v0, v0
+; GISEL-NEXT:    v_mul_lo_u32 v1, v1, v1
+; GISEL-NEXT:    global_load_dwordx4 v[4:7], v32, s[0:1] offset:16
+; GISEL-NEXT:    v_mul_lo_u32 v2, v2, v2
+; GISEL-NEXT:    v_mul_lo_u32 v3, v3, v3
+; GISEL-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:32
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(1)
-; GISEL-NEXT:    v_mul_lo_u32 v8, v8, v8
-; GISEL-NEXT:    v_mul_lo_u32 v9, v9, v9
+; GISEL-NEXT:    v_mul_lo_u32 v4, v4, v4
+; GISEL-NEXT:    v_mul_lo_u32 v5, v5, v5
 ; GISEL-NEXT:    global_load_dwordx4 v[16:19], v32, s[0:1] offset:48
-; GISEL-NEXT:    v_mul_lo_u32 v10, v10, v10
-; GISEL-NEXT:    v_mul_lo_u32 v11, v11, v11
+; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
+; GISEL-NEXT:    v_mul_lo_u32 v7, v7, v7
 ; GISEL-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:64
 ; GISEL-NEXT:    s_waitcnt vmcnt(2)
-; GISEL-NEXT:    v_mul_lo_u32 v12, v12, v12
-; GISEL-NEXT:    v_mul_lo_u32 v13, v13, v13
+; GISEL-NEXT:    v_mul_lo_u32 v8, v8, v8
+; GISEL-NEXT:    v_mul_lo_u32 v9, v9, v9
 ; GISEL-NEXT:    global_load_dwordx4 v[24:27], v32, s[0:1] offset:80
-; GISEL-NEXT:    v_mul_lo_u32 v14, v14, v14
-; GISEL-NEXT:    v_mul_lo_u32 v15, v15, v15
-; GISEL-NEXT:    global_store_dwordx4 v32, v[4:7], s[2:3]
-; GISEL-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:16
-; GISEL-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:32
+; GISEL-NEXT:    v_mul_lo_u32 v10, v10, v10
+; GISEL-NEXT:    v_mul_lo_u32 v11, v11, v11
+; GISEL-NEXT:    global_store_dwordx4 v32, v[0:3], s[2:3]
+; GISEL-NEXT:    global_store_dwordx4 v32, v[4:7], s[2:3] offset:16
+; GISEL-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:32
 ; GISEL-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:96
-; GISEL-NEXT:    global_store_dwordx4 v32, v[0:3], s[2:3] offset:112
+; GISEL-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:112
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
@@ -413,79 +411,77 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; EXACTCUTOFF:       ; %bb.0:
 ; EXACTCUTOFF-NEXT:    s_load_dwordx4 s[0:3], s[4:5], 0x24
 ; EXACTCUTOFF-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
-; EXACTCUTOFF-NEXT:    v_lshlrev_b32_e32 v32, 7, v0
+; EXACTCUTOFF-NEXT:    v_lshlrev_b32_e32 v38, 7, v0
 ; EXACTCUTOFF-NEXT:    s_waitcnt lgkmcnt(0)
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[28:31], v32, s[0:1] offset:48
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[0:3], v32, s[0:1]
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[18:21], v38, s[0:1] offset:48
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[0:3], v38, s[0:1]
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v31, v31, v31
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v3, v3, v3
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v2, v2, v2
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[4:7], v32, s[0:1] offset:112
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[22:25], v38, s[0:1] offset:112
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v1, v1, v1
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v0, v0, v0
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[8:11], v32, s[0:1] offset:96
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v30, v30, v30
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v29, v29, v29
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v28, v28, v28
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[10:13], v38, s[0:1] offset:96
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v7, v7, v7
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v6, v6, v6
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[12:15], v32, s[0:1] offset:80
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v37, v25, v25
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v36, v24, v24
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[30:33], v38, s[0:1] offset:80
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v35, v23, v23
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v34, v22, v22
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[4:7], v38, s[0:1] offset:16
+; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
+; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
+; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
+; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
+; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v23, v31, v31
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v22, v30, v30
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v31, v11, v11
+; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v5, v5, v5
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v4, v4, v4
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[16:19], v32, s[0:1] offset:16
-; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(2)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v11, v11, v11
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v10, v10, v10
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v9, v9, v9
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v8, v8, v8
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[26:29], v38, s[0:1] offset:64
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v25, v33, v33
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v24, v32, v32
+; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[14:17], v38, s[0:1] offset:32
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v33, v13, v13
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v32, v12, v12
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v30, v10, v10
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v7, v7, v7
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v6, v6, v6
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v13, v19, v19
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v12, v18, v18
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v13, v13, v13
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v12, v12, v12
-; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v17, v17, v17
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v16, v16, v16
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[20:23], v32, s[0:1] offset:64
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v15, v15, v15
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v14, v14, v14
-; EXACTCUTOFF-NEXT:    global_load_dwordx4 v[24:27], v32, s[0:1] offset:32
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v19, v19, v19
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v18, v18, v18
-; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
-; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
-; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
-; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(1)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v23, v23, v23
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v22, v22, v22
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v21, v21, v21
-; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v25, v25, v25
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v24, v24, v24
-; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v20, v20, v20
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v29, v29, v29
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v28, v28, v28
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v27, v27, v27
+; EXACTCUTOFF-NEXT:    s_waitcnt vmcnt(0)
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v9, v15, v15
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v8, v14, v14
 ; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v26, v26, v26
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[4:7], s[2:3] offset:112
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[8:11], s[2:3] offset:96
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[12:15], s[2:3] offset:80
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[20:23], s[2:3] offset:64
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[28:31], s[2:3] offset:48
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[24:27], s[2:3] offset:32
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[16:19], s[2:3] offset:16
-; EXACTCUTOFF-NEXT:    global_store_dwordx4 v32, v[0:3], s[2:3]
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v15, v21, v21
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v14, v20, v20
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v11, v17, v17
+; EXACTCUTOFF-NEXT:    v_mul_lo_u32 v10, v16, v16
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[34:37], s[2:3] offset:112
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[30:33], s[2:3] offset:96
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[22:25], s[2:3] offset:80
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[26:29], s[2:3] offset:64
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[12:15], s[2:3] offset:48
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[8:11], s[2:3] offset:32
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[4:7], s[2:3] offset:16
+; EXACTCUTOFF-NEXT:    global_store_dwordx4 v38, v[0:3], s[2:3]
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; EXACTCUTOFF-NEXT:    ; sched_group_barrier mask(0x00000040) size(8) SyncID(0)
 ; EXACTCUTOFF-NEXT:    s_endpgm
@@ -625,23 +621,23 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; GISEL:       ; %bb.0:
 ; GISEL-NEXT:    s_load_dwordx4 s[0:3], s[4:5], 0x24
 ; GISEL-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
-; GISEL-NEXT:    v_lshlrev_b32_e32 v12, 7, v0
+; GISEL-NEXT:    v_lshlrev_b32_e32 v16, 7, v0
 ; GISEL-NEXT:    s_waitcnt lgkmcnt(0)
-; GISEL-NEXT:    global_load_dwordx4 v[8:11], v12, s[0:1] offset:96
+; GISEL-NEXT:    global_load_dwordx4 v[8:11], v16, s[0:1] offset:96
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
 ; GISEL-NEXT:    v_mul_lo_u32 v8, v8, v8
 ; GISEL-NEXT:    v_mul_lo_u32 v9, v9, v9
 ; GISEL-NEXT:    v_mul_lo_u32 v10, v10, v10
 ; GISEL-NEXT:    v_mul_lo_u32 v11, v11, v11
-; GISEL-NEXT:    global_store_dwordx4 v12, v[8:11], s[2:3] offset:96
-; GISEL-NEXT:    global_load_dwordx4 v[8:11], v12, s[0:1] offset:16
+; GISEL-NEXT:    global_store_dwordx4 v16, v[8:11], s[2:3] offset:96
+; GISEL-NEXT:    global_load_dwordx4 v[8:11], v16, s[0:1] offset:16
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
 ; GISEL-NEXT:    v_mul_lo_u32 v8, v8, v8
 ; GISEL-NEXT:    v_mul_lo_u32 v9, v9, v9
 ; GISEL-NEXT:    v_mul_lo_u32 v10, v10, v10
 ; GISEL-NEXT:    v_mul_lo_u32 v11, v11, v11
-; GISEL-NEXT:    global_store_dwordx4 v12, v[8:11], s[2:3] offset:16
-; GISEL-NEXT:    global_load_dwordx4 v[8:11], v12, s[0:1] offset:64
+; GISEL-NEXT:    global_store_dwordx4 v16, v[8:11], s[2:3] offset:16
+; GISEL-NEXT:    global_load_dwordx4 v[8:11], v16, s[0:1] offset:64
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
@@ -649,25 +645,24 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; GISEL-NEXT:    v_mul_lo_u32 v9, v9, v9
 ; GISEL-NEXT:    v_mul_lo_u32 v10, v10, v10
 ; GISEL-NEXT:    v_mul_lo_u32 v11, v11, v11
-; GISEL-NEXT:    global_store_dwordx4 v12, v[8:11], s[2:3] offset:64
-; GISEL-NEXT:    global_load_dwordx4 v[0:3], v12, s[0:1] offset:112
+; GISEL-NEXT:    global_store_dwordx4 v16, v[8:11], s[2:3] offset:64
+; GISEL-NEXT:    global_load_dwordx4 v[0:3], v16, s[0:1] offset:112
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000040) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
+; GISEL-NEXT:    s_waitcnt vmcnt(0)
+; GISEL-NEXT:    v_mul_lo_u32 v12, v0, v0
+; GISEL-NEXT:    v_mul_lo_u32 v13, v1, v1
+; GISEL-NEXT:    v_mul_lo_u32 v14, v2, v2
+; GISEL-NEXT:    v_mul_lo_u32 v15, v3, v3
+; GISEL-NEXT:    global_load_dwordx4 v[0:3], v16, s[0:1] offset:32
+; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
 ; GISEL-NEXT:    v_mul_lo_u32 v0, v0, v0
 ; GISEL-NEXT:    v_mul_lo_u32 v1, v1, v1
 ; GISEL-NEXT:    v_mul_lo_u32 v2, v2, v2
 ; GISEL-NEXT:    v_mul_lo_u32 v3, v3, v3
-; GISEL-NEXT:    global_store_dwordx4 v12, v[0:3], s[2:3] offset:112
-; GISEL-NEXT:    global_load_dwordx4 v[0:3], v12, s[0:1] offset:48
-; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
-; GISEL-NEXT:    s_waitcnt vmcnt(0)
-; GISEL-NEXT:    v_mul_lo_u32 v2, v2, v2
-; GISEL-NEXT:    v_mul_lo_u32 v0, v0, v0
-; GISEL-NEXT:    v_mul_lo_u32 v1, v1, v1
-; GISEL-NEXT:    v_mul_lo_u32 v3, v3, v3
-; GISEL-NEXT:    global_store_dwordx4 v12, v[0:3], s[2:3] offset:48
-; GISEL-NEXT:    global_load_dwordx4 v[4:7], v12, s[0:1] offset:80
+; GISEL-NEXT:    global_store_dwordx4 v16, v[0:3], s[2:3] offset:32
+; GISEL-NEXT:    global_load_dwordx4 v[4:7], v16, s[0:1] offset:80
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000040) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
@@ -675,22 +670,23 @@ define amdgpu_kernel void @test_sched_group_barrier_pipeline_alternating_READ_VA
 ; GISEL-NEXT:    v_mul_lo_u32 v5, v5, v5
 ; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
 ; GISEL-NEXT:    v_mul_lo_u32 v7, v7, v7
-; GISEL-NEXT:    global_store_dwordx4 v12, v[4:7], s[2:3] offset:80
-; GISEL-NEXT:    global_load_dwordx4 v[4:7], v12, s[0:1]
+; GISEL-NEXT:    global_store_dwordx4 v16, v[4:7], s[2:3] offset:80
+; GISEL-NEXT:    global_load_dwordx4 v[4:7], v16, s[0:1]
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
 ; GISEL-NEXT:    v_mul_lo_u32 v4, v4, v4
 ; GISEL-NEXT:    v_mul_lo_u32 v5, v5, v5
 ; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
 ; GISEL-NEXT:    v_mul_lo_u32 v7, v7, v7
-; GISEL-NEXT:    global_store_dwordx4 v12, v[4:7], s[2:3]
-; GISEL-NEXT:    global_load_dwordx4 v[4:7], v12, s[0:1] offset:32
+; GISEL-NEXT:    global_store_dwordx4 v16, v[4:7], s[2:3]
+; GISEL-NEXT:    global_load_dwordx4 v[4:7], v16, s[0:1] offset:48
 ; GISEL-NEXT:    s_waitcnt vmcnt(0)
+; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
 ; GISEL-NEXT:    v_mul_lo_u32 v4, v4, v4
 ; GISEL-NEXT:    v_mul_lo_u32 v5, v5, v5
-; GISEL-NEXT:    v_mul_lo_u32 v6, v6, v6
 ; GISEL-NEXT:    v_mul_lo_u32 v7, v7, v7
-; GISEL-NEXT:    global_store_dwordx4 v12, v[4:7], s[2:3] offset:32
+; GISEL-NEXT:    global_store_dwordx4 v16, v[4:7], s[2:3] offset:48
+; GISEL-NEXT:    global_store_dwordx4 v16, v[12:15], s[2:3] offset:112
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000040) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000020) size(1) SyncID(0)
 ; GISEL-NEXT:    ; sched_group_barrier mask(0x00000002) size(2) SyncID(0)

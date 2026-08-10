@@ -790,15 +790,15 @@ define amdgpu_kernel void @struct_ptr_atomic_buffer_load_v4i32(ptr addrspace(8) 
 ; GFX11-NEXT:    s_clause 0x1
 ; GFX11-NEXT:    s_load_b128 s[0:3], s[4:5], 0x24
 ; GFX11-NEXT:    s_load_b32 s4, s[4:5], 0x34
-; GFX11-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
+; GFX11-NEXT:    v_and_b32_e32 v4, 0x3ff, v0
 ; GFX11-NEXT:    s_mov_b32 s5, 0
 ; GFX11-NEXT:  .LBB9_1: ; %bb1
 ; GFX11-NEXT:    ; =>This Inner Loop Header: Depth=1
 ; GFX11-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX11-NEXT:    v_mov_b32_e32 v1, s4
-; GFX11-NEXT:    buffer_load_b128 v[1:4], v1, s[0:3], 0 idxen offset:4 glc
+; GFX11-NEXT:    v_mov_b32_e32 v0, s4
+; GFX11-NEXT:    buffer_load_b128 v[0:3], v0, s[0:3], 0 idxen offset:4 glc
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
-; GFX11-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v4, v0
+; GFX11-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v3, v4
 ; GFX11-NEXT:    s_or_b32 s5, vcc_lo, s5
 ; GFX11-NEXT:    s_delay_alu instid0(SALU_CYCLE_1)
 ; GFX11-NEXT:    s_and_not1_b32 exec_lo, exec_lo, s5
@@ -814,16 +814,16 @@ define amdgpu_kernel void @struct_ptr_atomic_buffer_load_v4i32(ptr addrspace(8) 
 ; GFX12-NEXT:    s_clause 0x1
 ; GFX12-NEXT:    s_load_b128 s[0:3], s[4:5], 0x24 nv
 ; GFX12-NEXT:    s_load_b32 s6, s[4:5], 0x34 nv
-; GFX12-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
+; GFX12-NEXT:    v_and_b32_e32 v4, 0x3ff, v0
 ; GFX12-NEXT:    s_wait_xcnt 0x0
 ; GFX12-NEXT:    s_mov_b32 s4, 0
 ; GFX12-NEXT:  .LBB9_1: ; %bb1
 ; GFX12-NEXT:    ; =>This Inner Loop Header: Depth=1
 ; GFX12-NEXT:    s_wait_kmcnt 0x0
-; GFX12-NEXT:    v_mov_b32_e32 v1, s6
-; GFX12-NEXT:    buffer_load_b128 v[2:5], v1, s[0:3], null idxen offset:4 th:TH_LOAD_NT
+; GFX12-NEXT:    v_mov_b32_e32 v0, s6
+; GFX12-NEXT:    buffer_load_b128 v[0:3], v0, s[0:3], null idxen offset:4 th:TH_LOAD_NT
 ; GFX12-NEXT:    s_wait_loadcnt 0x0
-; GFX12-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v5, v0
+; GFX12-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v3, v4
 ; GFX12-NEXT:    s_or_b32 s4, vcc_lo, s4
 ; GFX12-NEXT:    s_delay_alu instid0(SALU_CYCLE_1)
 ; GFX12-NEXT:    s_and_not1_b32 exec_lo, exec_lo, s4

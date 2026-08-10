@@ -570,41 +570,41 @@ define void @flat_offset_inbounds_very_wide(ptr %p, ptr %pout, i32 %i) {
 ; GFX10-SDAG-NEXT:    v_lshlrev_b64 v[4:5], 2, v[4:5]
 ; GFX10-SDAG-NEXT:    v_add_co_u32 v0, vcc_lo, v0, v4
 ; GFX10-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, v1, v5, vcc_lo
-; GFX10-SDAG-NEXT:    v_add_co_u32 v36, vcc_lo, v0, 28
-; GFX10-SDAG-NEXT:    v_add_co_ci_u32_e64 v37, null, 0, v1, vcc_lo
+; GFX10-SDAG-NEXT:    v_add_co_u32 v4, vcc_lo, v0, 28
+; GFX10-SDAG-NEXT:    v_add_co_ci_u32_e64 v5, null, 0, v1, vcc_lo
 ; GFX10-SDAG-NEXT:    s_clause 0x8
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[4:7], v[36:37] offset:80
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[8:11], v[36:37] offset:96
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[12:15], v[36:37] offset:48
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[16:19], v[36:37] offset:64
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[20:23], v[36:37] offset:16
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[24:27], v[36:37] offset:32
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[28:31], v[0:1] offset:12
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[32:35], v[36:37]
-; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[36:39], v[36:37] offset:112
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[36:39], v[4:5] offset:80
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[32:35], v[4:5] offset:96
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[28:31], v[4:5] offset:48
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[24:27], v[4:5] offset:64
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[20:23], v[4:5] offset:16
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[16:19], v[4:5] offset:32
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[12:15], v[0:1] offset:12
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[8:11], v[4:5]
+; GFX10-SDAG-NEXT:    flat_load_dwordx4 v[4:7], v[4:5] offset:112
 ; GFX10-SDAG-NEXT:    v_add_co_u32 v0, vcc_lo, v2, 48
 ; GFX10-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, 0, v3, vcc_lo
 ; GFX10-SDAG-NEXT:    v_add_co_u32 v48, vcc_lo, 0x88, v2
 ; GFX10-SDAG-NEXT:    v_add_co_ci_u32_e64 v49, null, 0, v3, vcc_lo
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(8) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[4:7] offset:48
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[36:39] offset:48
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(7) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[8:11] offset:64
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[32:35] offset:64
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(6) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[12:15] offset:64
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[28:31] offset:64
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(5) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[16:19] offset:32
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[24:27] offset:32
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(4) lgkmcnt(8)
 ; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[20:23] offset:32
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(3) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[24:27]
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[0:1], v[16:19]
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(2) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[28:31]
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[12:15]
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(1) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[32:35] offset:16
+; GFX10-SDAG-NEXT:    flat_store_dwordx4 v[2:3], v[8:11] offset:16
 ; GFX10-SDAG-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(8)
-; GFX10-SDAG-NEXT:    flat_store_dword v[48:49], v38
-; GFX10-SDAG-NEXT:    flat_store_dwordx2 v[2:3], v[36:37] offset:128
+; GFX10-SDAG-NEXT:    flat_store_dword v[48:49], v6
+; GFX10-SDAG-NEXT:    flat_store_dwordx2 v[2:3], v[4:5] offset:128
 ; GFX10-SDAG-NEXT:    s_waitcnt lgkmcnt(0)
 ; GFX10-SDAG-NEXT:    s_setpc_b64 s[30:31]
 ;
@@ -671,38 +671,38 @@ define void @flat_offset_inbounds_very_wide(ptr %p, ptr %pout, i32 %i) {
 ; GFX11-SDAG-NEXT:    v_add_co_u32 v0, vcc_lo, v0, v4
 ; GFX11-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_1) | instskip(NEXT) | instid1(VALU_DEP_2)
 ; GFX11-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, v1, v5, vcc_lo
-; GFX11-SDAG-NEXT:    v_add_co_u32 v36, vcc_lo, v0, 28
+; GFX11-SDAG-NEXT:    v_add_co_u32 v8, vcc_lo, v0, 28
 ; GFX11-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_1)
-; GFX11-SDAG-NEXT:    v_add_co_ci_u32_e64 v37, null, 0, v1, vcc_lo
+; GFX11-SDAG-NEXT:    v_add_co_ci_u32_e64 v9, null, 0, v1, vcc_lo
 ; GFX11-SDAG-NEXT:    s_clause 0x7
-; GFX11-SDAG-NEXT:    flat_load_b128 v[4:7], v[36:37] offset:80
-; GFX11-SDAG-NEXT:    flat_load_b128 v[8:11], v[36:37] offset:96
-; GFX11-SDAG-NEXT:    flat_load_b128 v[12:15], v[36:37] offset:64
-; GFX11-SDAG-NEXT:    flat_load_b128 v[16:19], v[36:37] offset:32
-; GFX11-SDAG-NEXT:    flat_load_b128 v[20:23], v[36:37] offset:16
-; GFX11-SDAG-NEXT:    flat_load_b128 v[24:27], v[36:37]
-; GFX11-SDAG-NEXT:    flat_load_b128 v[28:31], v[0:1] offset:12
-; GFX11-SDAG-NEXT:    flat_load_b128 v[32:35], v[36:37] offset:112
+; GFX11-SDAG-NEXT:    flat_load_b128 v[35:38], v[8:9] offset:80
+; GFX11-SDAG-NEXT:    flat_load_b128 v[31:34], v[8:9] offset:96
+; GFX11-SDAG-NEXT:    flat_load_b128 v[27:30], v[8:9] offset:64
+; GFX11-SDAG-NEXT:    flat_load_b128 v[19:22], v[8:9] offset:32
+; GFX11-SDAG-NEXT:    flat_load_b128 v[23:26], v[8:9] offset:16
+; GFX11-SDAG-NEXT:    flat_load_b128 v[11:14], v[8:9]
+; GFX11-SDAG-NEXT:    flat_load_b128 v[15:18], v[0:1] offset:12
+; GFX11-SDAG-NEXT:    flat_load_b128 v[4:7], v[8:9] offset:112
 ; GFX11-SDAG-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(0)
-; GFX11-SDAG-NEXT:    flat_load_b128 v[35:38], v[36:37] offset:48
+; GFX11-SDAG-NEXT:    flat_load_b128 v[7:10], v[8:9] offset:48
 ; GFX11-SDAG-NEXT:    v_add_co_u32 v0, vcc_lo, v2, 48
 ; GFX11-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_1) | instskip(SKIP_1) | instid1(VALU_DEP_1)
 ; GFX11-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, 0, v3, vcc_lo
 ; GFX11-SDAG-NEXT:    v_add_co_u32 v48, vcc_lo, 0x88, v2
 ; GFX11-SDAG-NEXT:    v_add_co_ci_u32_e64 v49, null, 0, v3, vcc_lo
 ; GFX11-SDAG-NEXT:    s_clause 0x7
-; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[4:7] offset:48
-; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[8:11] offset:64
-; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[12:15] offset:32
-; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[16:19]
-; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[20:23] offset:32
-; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[24:27] offset:16
-; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[28:31]
-; GFX11-SDAG-NEXT:    flat_store_b32 v[48:49], v34
+; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[35:38] offset:48
+; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[31:34] offset:64
+; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[27:30] offset:32
+; GFX11-SDAG-NEXT:    flat_store_b128 v[0:1], v[19:22]
+; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[23:26] offset:32
+; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[11:14] offset:16
+; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[15:18]
+; GFX11-SDAG-NEXT:    flat_store_b32 v[48:49], v6
 ; GFX11-SDAG-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(8)
 ; GFX11-SDAG-NEXT:    s_clause 0x1
-; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[35:38] offset:64
-; GFX11-SDAG-NEXT:    flat_store_b64 v[2:3], v[32:33] offset:128
+; GFX11-SDAG-NEXT:    flat_store_b128 v[2:3], v[7:10] offset:64
+; GFX11-SDAG-NEXT:    flat_store_b64 v[2:3], v[4:5] offset:128
 ; GFX11-SDAG-NEXT:    s_waitcnt lgkmcnt(0)
 ; GFX11-SDAG-NEXT:    s_setpc_b64 s[30:31]
 ;
@@ -720,21 +720,21 @@ define void @flat_offset_inbounds_very_wide(ptr %p, ptr %pout, i32 %i) {
 ; GFX12-SDAG-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; GFX12-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2)
 ; GFX12-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, v1, v5, vcc_lo
-; GFX12-SDAG-NEXT:    v_add_co_u32 v36, vcc_lo, v0, 28
+; GFX12-SDAG-NEXT:    v_add_co_u32 v8, vcc_lo, v0, 28
 ; GFX12-SDAG-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; GFX12-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_2)
-; GFX12-SDAG-NEXT:    v_add_co_ci_u32_e64 v37, null, 0, v1, vcc_lo
+; GFX12-SDAG-NEXT:    v_add_co_ci_u32_e64 v9, null, 0, v1, vcc_lo
 ; GFX12-SDAG-NEXT:    s_clause 0x7
-; GFX12-SDAG-NEXT:    flat_load_b128 v[4:7], v[36:37] offset:80
-; GFX12-SDAG-NEXT:    flat_load_b128 v[8:11], v[36:37] offset:96
-; GFX12-SDAG-NEXT:    flat_load_b128 v[12:15], v[36:37] offset:64
-; GFX12-SDAG-NEXT:    flat_load_b128 v[16:19], v[36:37] offset:32
-; GFX12-SDAG-NEXT:    flat_load_b128 v[20:23], v[36:37] offset:16
-; GFX12-SDAG-NEXT:    flat_load_b128 v[24:27], v[36:37]
-; GFX12-SDAG-NEXT:    flat_load_b128 v[28:31], v[0:1] offset:12
-; GFX12-SDAG-NEXT:    flat_load_b128 v[32:35], v[36:37] offset:112
+; GFX12-SDAG-NEXT:    flat_load_b128 v[35:38], v[8:9] offset:80
+; GFX12-SDAG-NEXT:    flat_load_b128 v[31:34], v[8:9] offset:96
+; GFX12-SDAG-NEXT:    flat_load_b128 v[27:30], v[8:9] offset:64
+; GFX12-SDAG-NEXT:    flat_load_b128 v[19:22], v[8:9] offset:32
+; GFX12-SDAG-NEXT:    flat_load_b128 v[23:26], v[8:9] offset:16
+; GFX12-SDAG-NEXT:    flat_load_b128 v[11:14], v[8:9]
+; GFX12-SDAG-NEXT:    flat_load_b128 v[15:18], v[0:1] offset:12
+; GFX12-SDAG-NEXT:    flat_load_b128 v[4:7], v[8:9] offset:112
 ; GFX12-SDAG-NEXT:    s_wait_loadcnt_dscnt 0x0
-; GFX12-SDAG-NEXT:    flat_load_b128 v[35:38], v[36:37] offset:48
+; GFX12-SDAG-NEXT:    flat_load_b128 v[7:10], v[8:9] offset:48
 ; GFX12-SDAG-NEXT:    v_add_co_u32 v0, vcc_lo, v2, 48
 ; GFX12-SDAG-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; GFX12-SDAG-NEXT:    v_add_co_ci_u32_e64 v1, null, 0, v3, vcc_lo
@@ -742,18 +742,18 @@ define void @flat_offset_inbounds_very_wide(ptr %p, ptr %pout, i32 %i) {
 ; GFX12-SDAG-NEXT:    s_wait_alu depctr_va_vcc(0)
 ; GFX12-SDAG-NEXT:    v_add_co_ci_u32_e64 v49, null, 0, v3, vcc_lo
 ; GFX12-SDAG-NEXT:    s_clause 0x7
-; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[4:7] offset:48
-; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[8:11] offset:64
-; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[12:15] offset:32
-; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[16:19]
-; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[20:23] offset:32
-; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[24:27] offset:16
-; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[28:31]
-; GFX12-SDAG-NEXT:    flat_store_b32 v[48:49], v34
+; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[35:38] offset:48
+; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[31:34] offset:64
+; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[27:30] offset:32
+; GFX12-SDAG-NEXT:    flat_store_b128 v[0:1], v[19:22]
+; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[23:26] offset:32
+; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[11:14] offset:16
+; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[15:18]
+; GFX12-SDAG-NEXT:    flat_store_b32 v[48:49], v6
 ; GFX12-SDAG-NEXT:    s_wait_loadcnt_dscnt 0x8
 ; GFX12-SDAG-NEXT:    s_clause 0x1
-; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[35:38] offset:64
-; GFX12-SDAG-NEXT:    flat_store_b64 v[2:3], v[32:33] offset:128
+; GFX12-SDAG-NEXT:    flat_store_b128 v[2:3], v[7:10] offset:64
+; GFX12-SDAG-NEXT:    flat_store_b64 v[2:3], v[4:5] offset:128
 ; GFX12-SDAG-NEXT:    s_wait_dscnt 0x0
 ; GFX12-SDAG-NEXT:    s_setpc_b64 s[30:31]
 ;

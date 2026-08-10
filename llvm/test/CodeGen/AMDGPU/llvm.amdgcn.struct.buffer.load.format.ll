@@ -107,97 +107,97 @@ main_body:
 define amdgpu_ps <4 x float> @buffer_load_immoffs_large(<4 x i32> inreg) {
 ; GFX6-LABEL: buffer_load_immoffs_large:
 ; GFX6:       ; %bb.0: ; %main_body
-; GFX6-NEXT:    v_mov_b32_e32 v8, 0
+; GFX6-NEXT:    v_mov_b32_e32 v0, 0
 ; GFX6-NEXT:    s_movk_i32 s4, 0x7ffc
-; GFX6-NEXT:    buffer_load_format_xyzw v[0:3], v8, s[0:3], 60 idxen offset:4092
-; GFX6-NEXT:    buffer_load_format_xyzw v[4:7], v8, s[0:3], s4 idxen offset:4092
+; GFX6-NEXT:    buffer_load_format_xyzw v[4:7], v0, s[0:3], 60 idxen offset:4092
+; GFX6-NEXT:    buffer_load_format_xyzw v[8:11], v0, s[0:3], s4 idxen offset:4092
 ; GFX6-NEXT:    s_mov_b32 s4, 0x8ffc
-; GFX6-NEXT:    buffer_load_format_xyzw v[8:11], v8, s[0:3], s4 idxen offset:4
+; GFX6-NEXT:    buffer_load_format_xyzw v[0:3], v0, s[0:3], s4 idxen offset:4
 ; GFX6-NEXT:    s_waitcnt vmcnt(1)
-; GFX6-NEXT:    v_add_f32_e32 v3, v3, v7
-; GFX6-NEXT:    v_add_f32_e32 v2, v2, v6
-; GFX6-NEXT:    v_add_f32_e32 v1, v1, v5
-; GFX6-NEXT:    v_add_f32_e32 v0, v0, v4
+; GFX6-NEXT:    v_add_f32_e32 v7, v7, v11
+; GFX6-NEXT:    v_add_f32_e32 v6, v6, v10
+; GFX6-NEXT:    v_add_f32_e32 v5, v5, v9
+; GFX6-NEXT:    v_add_f32_e32 v4, v4, v8
 ; GFX6-NEXT:    s_waitcnt vmcnt(0)
-; GFX6-NEXT:    v_add_f32_e32 v0, v8, v0
-; GFX6-NEXT:    v_add_f32_e32 v1, v9, v1
-; GFX6-NEXT:    v_add_f32_e32 v2, v10, v2
-; GFX6-NEXT:    v_add_f32_e32 v3, v11, v3
+; GFX6-NEXT:    v_add_f32_e32 v0, v0, v4
+; GFX6-NEXT:    v_add_f32_e32 v1, v1, v5
+; GFX6-NEXT:    v_add_f32_e32 v2, v2, v6
+; GFX6-NEXT:    v_add_f32_e32 v3, v3, v7
 ; GFX6-NEXT:    ; return to shader part epilog
 ;
 ; GFX8PLUS-LABEL: buffer_load_immoffs_large:
 ; GFX8PLUS:       ; %bb.0: ; %main_body
-; GFX8PLUS-NEXT:    v_mov_b32_e32 v8, 0
+; GFX8PLUS-NEXT:    v_mov_b32_e32 v0, 0
 ; GFX8PLUS-NEXT:    s_movk_i32 s4, 0x7ffc
-; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[0:3], v8, s[0:3], 60 idxen offset:4092
-; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[4:7], v8, s[0:3], s4 idxen offset:4092
+; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[4:7], v0, s[0:3], 60 idxen offset:4092
+; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[8:11], v0, s[0:3], s4 idxen offset:4092
 ; GFX8PLUS-NEXT:    s_mov_b32 s4, 0x8ffc
-; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[8:11], v8, s[0:3], s4 idxen offset:4
+; GFX8PLUS-NEXT:    buffer_load_format_xyzw v[0:3], v0, s[0:3], s4 idxen offset:4
 ; GFX8PLUS-NEXT:    s_waitcnt vmcnt(1)
-; GFX8PLUS-NEXT:    v_add_f32_e32 v3, v3, v7
-; GFX8PLUS-NEXT:    v_add_f32_e32 v2, v2, v6
-; GFX8PLUS-NEXT:    v_add_f32_e32 v1, v1, v5
-; GFX8PLUS-NEXT:    v_add_f32_e32 v0, v0, v4
+; GFX8PLUS-NEXT:    v_add_f32_e32 v7, v7, v11
+; GFX8PLUS-NEXT:    v_add_f32_e32 v6, v6, v10
+; GFX8PLUS-NEXT:    v_add_f32_e32 v5, v5, v9
+; GFX8PLUS-NEXT:    v_add_f32_e32 v4, v4, v8
 ; GFX8PLUS-NEXT:    s_waitcnt vmcnt(0)
-; GFX8PLUS-NEXT:    v_add_f32_e32 v0, v8, v0
-; GFX8PLUS-NEXT:    v_add_f32_e32 v1, v9, v1
-; GFX8PLUS-NEXT:    v_add_f32_e32 v2, v10, v2
-; GFX8PLUS-NEXT:    v_add_f32_e32 v3, v11, v3
+; GFX8PLUS-NEXT:    v_add_f32_e32 v0, v0, v4
+; GFX8PLUS-NEXT:    v_add_f32_e32 v1, v1, v5
+; GFX8PLUS-NEXT:    v_add_f32_e32 v2, v2, v6
+; GFX8PLUS-NEXT:    v_add_f32_e32 v3, v3, v7
 ; GFX8PLUS-NEXT:    ; return to shader part epilog
 ;
 ; GFX11-LABEL: buffer_load_immoffs_large:
 ; GFX11:       ; %bb.0: ; %main_body
-; GFX11-NEXT:    v_mov_b32_e32 v8, 0
+; GFX11-NEXT:    v_mov_b32_e32 v0, 0
 ; GFX11-NEXT:    s_movk_i32 s4, 0x7ffc
 ; GFX11-NEXT:    s_clause 0x1
-; GFX11-NEXT:    buffer_load_format_xyzw v[0:3], v8, s[0:3], 60 idxen offset:4092
-; GFX11-NEXT:    buffer_load_format_xyzw v[4:7], v8, s[0:3], s4 idxen offset:4092
+; GFX11-NEXT:    buffer_load_format_xyzw v[4:7], v0, s[0:3], 60 idxen offset:4092
+; GFX11-NEXT:    buffer_load_format_xyzw v[8:11], v0, s[0:3], s4 idxen offset:4092
 ; GFX11-NEXT:    s_mov_b32 s4, 0x8ffc
-; GFX11-NEXT:    buffer_load_format_xyzw v[8:11], v8, s[0:3], s4 idxen offset:4
+; GFX11-NEXT:    buffer_load_format_xyzw v[0:3], v0, s[0:3], s4 idxen offset:4
 ; GFX11-NEXT:    s_waitcnt vmcnt(1)
-; GFX11-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
-; GFX11-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
+; GFX11-NEXT:    v_dual_add_f32 v4, v4, v8 :: v_dual_add_f32 v5, v5, v9
+; GFX11-NEXT:    v_dual_add_f32 v6, v6, v10 :: v_dual_add_f32 v7, v7, v11
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
 ; GFX11-NEXT:    s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2)
-; GFX11-NEXT:    v_dual_add_f32 v0, v8, v0 :: v_dual_add_f32 v1, v9, v1
-; GFX11-NEXT:    v_dual_add_f32 v2, v10, v2 :: v_dual_add_f32 v3, v11, v3
+; GFX11-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
+; GFX11-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
 ; GFX11-NEXT:    ; return to shader part epilog
 ;
 ; NOPRT-LABEL: buffer_load_immoffs_large:
 ; NOPRT:       ; %bb.0: ; %main_body
-; NOPRT-NEXT:    v_mov_b32_e32 v8, 0
+; NOPRT-NEXT:    v_mov_b32_e32 v0, 0
 ; NOPRT-NEXT:    s_movk_i32 s4, 0x7ffc
 ; NOPRT-NEXT:    s_clause 0x1
-; NOPRT-NEXT:    buffer_load_format_xyzw v[0:3], v8, s[0:3], 60 idxen offset:4092
-; NOPRT-NEXT:    buffer_load_format_xyzw v[4:7], v8, s[0:3], s4 idxen offset:4092
+; NOPRT-NEXT:    buffer_load_format_xyzw v[4:7], v0, s[0:3], 60 idxen offset:4092
+; NOPRT-NEXT:    buffer_load_format_xyzw v[8:11], v0, s[0:3], s4 idxen offset:4092
 ; NOPRT-NEXT:    s_mov_b32 s4, 0x8ffc
-; NOPRT-NEXT:    buffer_load_format_xyzw v[8:11], v8, s[0:3], s4 idxen offset:4
+; NOPRT-NEXT:    buffer_load_format_xyzw v[0:3], v0, s[0:3], s4 idxen offset:4
 ; NOPRT-NEXT:    s_waitcnt vmcnt(1)
-; NOPRT-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
-; NOPRT-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
+; NOPRT-NEXT:    v_dual_add_f32 v4, v4, v8 :: v_dual_add_f32 v5, v5, v9
+; NOPRT-NEXT:    v_dual_add_f32 v6, v6, v10 :: v_dual_add_f32 v7, v7, v11
 ; NOPRT-NEXT:    s_waitcnt vmcnt(0)
 ; NOPRT-NEXT:    s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2)
-; NOPRT-NEXT:    v_dual_add_f32 v0, v8, v0 :: v_dual_add_f32 v1, v9, v1
-; NOPRT-NEXT:    v_dual_add_f32 v2, v10, v2 :: v_dual_add_f32 v3, v11, v3
+; NOPRT-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
+; NOPRT-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
 ; NOPRT-NEXT:    ; return to shader part epilog
 ;
 ; GFX12-SDAG-LABEL: buffer_load_immoffs_large:
 ; GFX12-SDAG:       ; %bb.0: ; %main_body
-; GFX12-SDAG-NEXT:    v_mov_b32_e32 v8, 0
+; GFX12-SDAG-NEXT:    v_mov_b32_e32 v0, 0
 ; GFX12-SDAG-NEXT:    s_mov_b32 s4, 60
 ; GFX12-SDAG-NEXT:    s_movk_i32 s5, 0x7ffc
 ; GFX12-SDAG-NEXT:    s_clause 0x1
-; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[0:3], v8, s[0:3], s4 idxen offset:4092
-; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[4:7], v8, s[0:3], s5 idxen offset:4092
+; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[4:7], v0, s[0:3], s4 idxen offset:4092
+; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[8:11], v0, s[0:3], s5 idxen offset:4092
 ; GFX12-SDAG-NEXT:    s_mov_b32 s4, 0x8ffc
-; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[8:11], v8, s[0:3], s4 idxen offset:4
+; GFX12-SDAG-NEXT:    buffer_load_format_xyzw v[0:3], v0, s[0:3], s4 idxen offset:4
 ; GFX12-SDAG-NEXT:    s_wait_loadcnt 0x1
-; GFX12-SDAG-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
-; GFX12-SDAG-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
+; GFX12-SDAG-NEXT:    v_dual_add_f32 v4, v4, v8 :: v_dual_add_f32 v5, v5, v9
+; GFX12-SDAG-NEXT:    v_dual_add_f32 v6, v6, v10 :: v_dual_add_f32 v7, v7, v11
 ; GFX12-SDAG-NEXT:    s_wait_loadcnt 0x0
 ; GFX12-SDAG-NEXT:    s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2)
-; GFX12-SDAG-NEXT:    v_dual_add_f32 v0, v8, v0 :: v_dual_add_f32 v1, v9, v1
-; GFX12-SDAG-NEXT:    v_dual_add_f32 v2, v10, v2 :: v_dual_add_f32 v3, v11, v3
+; GFX12-SDAG-NEXT:    v_dual_add_f32 v0, v0, v4 :: v_dual_add_f32 v1, v1, v5
+; GFX12-SDAG-NEXT:    v_dual_add_f32 v2, v2, v6 :: v_dual_add_f32 v3, v3, v7
 ; GFX12-SDAG-NEXT:    ; return to shader part epilog
 ;
 ; GFX12-GISEL-LABEL: buffer_load_immoffs_large:

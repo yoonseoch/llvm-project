@@ -846,14 +846,14 @@ define amdgpu_kernel void @raw_ptr_atomic_buffer_load_v4i32(ptr addrspace(8) %pt
 ; GFX11-LABEL: raw_ptr_atomic_buffer_load_v4i32:
 ; GFX11:       ; %bb.0: ; %bb
 ; GFX11-NEXT:    s_load_b128 s[0:3], s[4:5], 0x24
-; GFX11-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
+; GFX11-NEXT:    v_and_b32_e32 v4, 0x3ff, v0
 ; GFX11-NEXT:    s_mov_b32 s4, 0
 ; GFX11-NEXT:  .LBB8_1: ; %bb1
 ; GFX11-NEXT:    ; =>This Inner Loop Header: Depth=1
 ; GFX11-NEXT:    s_waitcnt lgkmcnt(0)
-; GFX11-NEXT:    buffer_load_b128 v[1:4], off, s[0:3], 0 offset:4 glc
+; GFX11-NEXT:    buffer_load_b128 v[0:3], off, s[0:3], 0 offset:4 glc
 ; GFX11-NEXT:    s_waitcnt vmcnt(0)
-; GFX11-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v4, v0
+; GFX11-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v3, v4
 ; GFX11-NEXT:    s_or_b32 s4, vcc_lo, s4
 ; GFX11-NEXT:    s_delay_alu instid0(SALU_CYCLE_1)
 ; GFX11-NEXT:    s_and_not1_b32 exec_lo, exec_lo, s4
@@ -867,15 +867,15 @@ define amdgpu_kernel void @raw_ptr_atomic_buffer_load_v4i32(ptr addrspace(8) %pt
 ; GFX12-NEXT:    v_nop
 ; GFX12-NEXT:    s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 25, 1), 1 ; msbs: dst=0 src0=0 src1=0 src2=0
 ; GFX12-NEXT:    s_load_b128 s[0:3], s[4:5], 0x24 nv
-; GFX12-NEXT:    v_and_b32_e32 v0, 0x3ff, v0
+; GFX12-NEXT:    v_and_b32_e32 v4, 0x3ff, v0
 ; GFX12-NEXT:    s_wait_xcnt 0x0
 ; GFX12-NEXT:    s_mov_b32 s4, 0
 ; GFX12-NEXT:  .LBB8_1: ; %bb1
 ; GFX12-NEXT:    ; =>This Inner Loop Header: Depth=1
 ; GFX12-NEXT:    s_wait_kmcnt 0x0
-; GFX12-NEXT:    buffer_load_b128 v[2:5], off, s[0:3], null offset:4 th:TH_LOAD_NT
+; GFX12-NEXT:    buffer_load_b128 v[0:3], off, s[0:3], null offset:4 th:TH_LOAD_NT
 ; GFX12-NEXT:    s_wait_loadcnt 0x0
-; GFX12-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v5, v0
+; GFX12-NEXT:    v_cmp_ne_u32_e32 vcc_lo, v3, v4
 ; GFX12-NEXT:    s_or_b32 s4, vcc_lo, s4
 ; GFX12-NEXT:    s_delay_alu instid0(SALU_CYCLE_1)
 ; GFX12-NEXT:    s_and_not1_b32 exec_lo, exec_lo, s4

@@ -111,15 +111,13 @@ define <4 x i64> @shl_v4_metadata(<4 x i64> %arg0, ptr %arg1.ptr) {
 ; CHECK-LABEL: shl_v4_metadata:
 ; CHECK:       ; %bb.0:
 ; CHECK-NEXT:    s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    flat_load_dwordx4 v[10:13], v[8:9]
+; CHECK-NEXT:    flat_load_dwordx4 v[14:17], v[8:9]
+; CHECK-NEXT:    flat_load_dwordx4 v[10:13], v[8:9] offset:16
 ; CHECK-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    flat_load_dwordx4 v[13:16], v[8:9] offset:16
-; CHECK-NEXT:    ; kill: killed $vgpr8 killed $vgpr9
-; CHECK-NEXT:    v_lshlrev_b32_e32 v1, v10, v0
-; CHECK-NEXT:    v_lshlrev_b32_e32 v3, v12, v2
-; CHECK-NEXT:    s_waitcnt vmcnt(0) lgkmcnt(0)
-; CHECK-NEXT:    v_lshlrev_b32_e32 v5, v13, v4
-; CHECK-NEXT:    v_lshlrev_b32_e32 v7, v15, v6
+; CHECK-NEXT:    v_lshlrev_b32_e32 v1, v14, v0
+; CHECK-NEXT:    v_lshlrev_b32_e32 v3, v16, v2
+; CHECK-NEXT:    v_lshlrev_b32_e32 v5, v10, v4
+; CHECK-NEXT:    v_lshlrev_b32_e32 v7, v12, v6
 ; CHECK-NEXT:    v_mov_b32_e32 v0, 0
 ; CHECK-NEXT:    v_mov_b32_e32 v2, 0
 ; CHECK-NEXT:    v_mov_b32_e32 v4, 0
