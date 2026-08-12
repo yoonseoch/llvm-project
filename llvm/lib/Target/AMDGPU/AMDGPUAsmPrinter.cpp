@@ -997,6 +997,13 @@ bool AMDGPUAsmPrinter::runOnMachineFunction(MachineFunction &MF) {
                        OutContext)
               ->getVariableValue(),
           CurrentProgramInfo.getFunctionCodeSize(MF), MFI);
+
+      const SIMachineFunctionInfo *SIFI =
+          MF.getInfo<SIMachineFunctionInfo>();
+      OutStreamer->emitRawComment(
+          " SGPRSpill: " + Twine(SIFI->getNumSpilledSGPRs()), false);
+      OutStreamer->emitRawComment(
+          " VGPRSpill: " + Twine(SIFI->getNumSpilledVGPRs()), false);
       return false;
     }
 
